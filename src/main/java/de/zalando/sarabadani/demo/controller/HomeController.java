@@ -16,8 +16,14 @@ public class HomeController {
     public ModelAndView home(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
-        modelAndView.addObject("name","soroosh");
+        modelAndView.addObject("name","Soroosh");
         return modelAndView;
 
+    }
+
+    @RequestMapping("/h")
+    public String another(Model model){
+        model.addAttribute("name","hamed");
+        return "index";
     }
 }

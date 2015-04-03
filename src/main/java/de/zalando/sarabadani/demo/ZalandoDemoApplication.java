@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("de.zalando.sarabadani.demo.controller")
+@ComponentScan({"de.zalando.sarabadani.demo.controller"})
+
 public class ZalandoDemoApplication {
 
     public static void main(String[] args) {
