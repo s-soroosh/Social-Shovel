@@ -6,8 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan({"de.zalando.sarabadani.demo.controller","de.zalando.sarabadani.demo.social"})
-//@EnableScheduling
+@ComponentScan
+@EnableScheduling
 public class ZalandoDemoApplication {
 
     public static void main(String[] args) {

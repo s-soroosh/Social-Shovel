@@ -41,4 +41,8 @@ public class HomeController {
         model.addAttribute("name", "hamed");
         return "index";
     }
+
+    public String socket(){
+        return "socket";
+    }
 }
