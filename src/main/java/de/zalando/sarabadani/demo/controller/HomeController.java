@@ -1,6 +1,7 @@
 package de.zalando.sarabadani.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
@@ -18,10 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+    @Value("${custom.value}")
+    private String v;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home(Model model) {
-
+        System.out.println(v);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         modelAndView.addObject("name", "Soroosh");
