@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>springloaded</artifactId>
-            <version>1.2.0.RELEASE</version>
+            <version>1.2.2.RELEASE</version>
         </dependency>
 
         <!--Web Jars-->
@@ -102,18 +102,34 @@
                 <configuration>
                     <mainClass>${start-class}</mainClass>
                     <jvmArguments>-Dspring.config.location=classpath:job1.properties,classpath:job2.properties</jvmArguments>
-
                     <!--<addResources>false</addResources>-->
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.springframework</groupId>
                         <artifactId>springloaded</artifactId>
-                        <version>1.2.0.RELEASE</version>
+                        <version>1.2.2.RELEASE</version>
                     </dependency>
                 </dependencies>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>Development</id>
+            <properties>
+                <config.path>classpath:development.properties</config.path>
+            </properties>
+
+        </profile>
+        <profile>
+            <id>Production</id>
+            <config.path>classpath:production.properties</config.path>
+        </profile>
+
+
+
+    </profiles>
 
 </project>
