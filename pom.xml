@@ -101,7 +101,8 @@
                 </executions>
                 <configuration>
                     <mainClass>${start-class}</mainClass>
-                    <jvmArguments>-Dspring.config.location=classpath:job1.properties,classpath:job2.properties</jvmArguments>
+                    <jvmArguments>-Dspring.config.location=classpath:job1.properties,classpath:job2.properties
+                    </jvmArguments>
                     <!--<addResources>false</addResources>-->
                 </configuration>
                 <dependencies>
@@ -125,9 +126,10 @@
         </profile>
         <profile>
             <id>Production</id>
-            <config.path>classpath:production.properties</config.path>
+            <properties>
+                <config.path>classpath:production.properties</config.path>
+            </properties>
         </profile>
-
 
 
     </profiles>
