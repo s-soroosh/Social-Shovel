@@ -1,4 +1,4 @@
-package de.zalando.sarabadani.demo.controller;
+package de.zalando.social.shovel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    @Value("${custom.value}")
+//    @Value("${custom.value}")
     private String v;
 
 

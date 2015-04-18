@@ -1,4 +1,4 @@
-package de.zalando.sarabadani.demo;
+package de.zalando.social.shovel;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

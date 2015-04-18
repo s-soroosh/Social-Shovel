@@ -1,4 +1,4 @@
-package de.zalando.sarabadani.demo.social;
+package de.zalando.social.shovel.social;
 
 /**
  * Created by SOROOSH on 4/3/15.

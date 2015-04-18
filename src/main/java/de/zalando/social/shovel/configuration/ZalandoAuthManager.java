@@ -1,4 +1,4 @@
-package de.zalando.sarabadani.demo.configuration;
+package de.zalando.social.shovel.configuration;
 
 //import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.core.Authentication;

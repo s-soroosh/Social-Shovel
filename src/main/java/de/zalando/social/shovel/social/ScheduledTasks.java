@@ -1,6 +1,6 @@
-package de.zalando.sarabadani.demo.social;
+package de.zalando.social.shovel.social;
 
-import de.zalando.sarabadani.demo.websocket.SimpleHandler;
+import de.zalando.social.shovel.websocket.SimpleHandler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 @Component
 public class ScheduledTasks {
-    @Scheduled(fixedRate = 15000)
+//    @Scheduled(fixedRate = 15000)
     public void doIt() {
         System.out.println("Number of sessions: " + SimpleHandler.sessions.size());
         for (WebSocketSession s : SimpleHandler.sessions) {
