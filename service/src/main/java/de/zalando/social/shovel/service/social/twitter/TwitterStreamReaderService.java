@@ -2,6 +2,9 @@ package de.zalando.social.shovel.service.social.twitter;
 
 import de.zalando.social.shovel.service.social.specification.MessagePublisher;
 import de.zalando.social.shovel.service.social.specification.MessageTransformer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import twitter4j.FilterQuery;
@@ -16,6 +19,7 @@ import javax.annotation.PostConstruct;
  */
 @Service
 public class TwitterStreamReaderService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TwitterStreamReaderService.class);
 
     @Autowired
     private MessageTransformer<Status> messageTransformer;
@@ -25,7 +29,7 @@ public class TwitterStreamReaderService {
 
     @PostConstruct
     public void init(){
-        System.out.println("Initilizing twitter service");
+        LOGGER.info("Initilizing twitter service");
         String[] topics = {"zalando"};
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.addListener(new TwitterStatusListener(topics,messageTransformer,publisherService));

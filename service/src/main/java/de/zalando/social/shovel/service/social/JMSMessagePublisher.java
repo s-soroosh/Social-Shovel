@@ -6,6 +6,7 @@ import de.zalando.social.shovel.service.social.specification.MessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class JMSMessagePublisher implements MessagePublisher {
+
+    @Value("${shovel.queue.message.destination}")
+    private String destination;
     private static final Logger LOGGER = LoggerFactory.getLogger(JMSMessagePublisher.class);
 
     @Autowired
@@ -23,6 +27,6 @@ public class JMSMessagePublisher implements MessagePublisher {
     @Override
     public void publish(Message msg) {
         LOGGER.info("Publishing message:{}", msg);
-        template.convertAndSend("msg", msg);
+        template.convertAndSend(destination, msg);
     }
 }
