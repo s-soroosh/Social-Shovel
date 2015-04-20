@@ -11,6 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 @EnableJms
-@ComponentScan({"de.zalando.social.shovel.service.twitter"})
+@ComponentScan({"de.zalando.social.shovel.service.social"})
 public class ServiceConfiguration {
 }
