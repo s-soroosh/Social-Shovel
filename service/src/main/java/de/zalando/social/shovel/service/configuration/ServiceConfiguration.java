@@ -1,5 +1,6 @@
 package de.zalando.social.shovel.service.configuration;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -10,5 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 @EnableJms
+@ComponentScan({"de.zalando.social.shovel.service.social"})
 public class ServiceConfiguration {
 }

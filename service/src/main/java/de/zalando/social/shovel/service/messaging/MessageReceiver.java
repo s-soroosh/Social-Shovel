@@ -11,7 +11,7 @@ public class MessageReceiver {
 
     @JmsListener(destination = "dest1")
     public void onMessage(Message msg){
-        System.out.println(msg.getName());
+//        System.out.println(msg.getName());
 
     }
 }
