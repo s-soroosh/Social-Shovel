@@ -40,8 +40,6 @@ public class TwitterStreamingService {
         };
         TwitterTemplate t = new TwitterTemplate("EYqDP7xAZPvfvh7Jz3vNBqrKe", "mHSTM7DTiSNWJFg3m8hMtDEMQmSXjjU2gp7EC75iqN3oytvDE4");
         streamingOperations = t.streamingOperations();
-//        Stream stream = streamingOperations.filter("#zalando", Arrays.asList(listener));
-//        stream.open();
     }
 
 }
