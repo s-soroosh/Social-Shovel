@@ -1,6 +1,6 @@
 package de.zalando.social.shovel.web.social;
 
-import de.zalando.social.shovel.web.messaging.Message;
+import de.zalando.social.shovel.service.messaging.Message;
 import de.zalando.social.shovel.web.websocket.SimpleHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;

@@ -3,14 +3,15 @@ package de.zalando.social.shovel.web;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @SpringBootApplication
-@ComponentScan
-@EnableScheduling
-@EnableJms
+@ComponentScan({"de.zalando.social.shovel.web.controller","de.zalando.social.shovel.web.configuration"})
+//@Import()
 public class ZalandoDemoApplication {
 
     public static void main(String[] args) {

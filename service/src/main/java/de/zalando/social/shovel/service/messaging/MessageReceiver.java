@@ -1,4 +1,4 @@
-package de.zalando.social.shovel.web.messaging;
+package de.zalando.social.shovel.service.messaging;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
