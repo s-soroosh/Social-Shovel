@@ -1,4 +1,4 @@
-package de.zalando.sarabadani.demo.configuration;
+package de.zalando.social.shovel.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

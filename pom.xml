@@ -21,7 +21,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>de.zalando.sarabadani.demo.ZalandoDemoApplication</start-class>
+        <start-class>de.zalando.social.shovel.ZalandoDemoApplication</start-class>
         <java.version>1.8</java.version>
         <maven.custom.value>One Hundred</maven.custom.value>
     </properties>
@@ -84,6 +84,32 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!-- ActiveMQ -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+        </dependency>
+
+        <!-- Twitter client -->
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-stream</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -101,7 +127,7 @@
                 </executions>
                 <configuration>
                     <mainClass>${start-class}</mainClass>
-                    <jvmArguments>-Dspring.config.location=classpath:job1.properties,classpath:job2.properties
+                    <jvmArguments>-Dspring.config.location=${config.path}
                     </jvmArguments>
                     <!--<addResources>false</addResources>-->
                 </configuration>
@@ -130,6 +156,7 @@
                 <config.path>classpath:production.properties</config.path>
             </properties>
         </profile>
+
 
 
     </profiles>

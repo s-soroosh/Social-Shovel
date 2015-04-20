@@ -1,4 +1,4 @@
-package de.zalando.sarabadani.demo.social;
+package de.zalando.social.shovel.social;
 
 import java.util.List;
 import java.util.Map;

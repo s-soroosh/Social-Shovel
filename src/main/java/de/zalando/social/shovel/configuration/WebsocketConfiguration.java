@@ -1,6 +1,6 @@
-package de.zalando.sarabadani.demo.configuration;
+package de.zalando.social.shovel.configuration;
 
-import de.zalando.sarabadani.demo.websocket.SimpleHandler;
+import de.zalando.social.shovel.websocket.SimpleHandler;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
