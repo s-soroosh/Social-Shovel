@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.zalando.social.shovel</groupId>
-    <artifactId>shovel-web</artifactId>
+    <groupId>de.zalando.social</groupId>
+    <artifactId>client-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
 
     <parent>
         <groupId>de.zalando.social</groupId>
@@ -94,5 +95,4 @@
         </plugins>
     </build>
 
-    
 </project>

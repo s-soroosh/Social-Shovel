@@ -21,7 +21,8 @@
 
     <modules>
         <module>service</module>
-        <module>web</module>
+        <module>client-api</module>
+        <module>frontend</module>
     </modules>
 
 

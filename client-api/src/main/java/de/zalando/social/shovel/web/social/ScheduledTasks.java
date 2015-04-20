@@ -21,7 +21,7 @@ public class ScheduledTasks {
     private JmsTemplate template;
 
 
-        @Scheduled(fixedRate = 15000)
+    @Scheduled(fixedRate = 15000)
     public void doIt() {
             System.out.println("Number of sessions: " + SimpleHandler.sessions.size());
             for (WebSocketSession s : SimpleHandler.sessions) {
