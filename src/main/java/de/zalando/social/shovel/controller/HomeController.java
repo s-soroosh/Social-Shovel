@@ -46,6 +46,7 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/socket")
     public String socket(){
         return "socket";
     }

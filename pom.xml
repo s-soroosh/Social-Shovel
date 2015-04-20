@@ -145,6 +145,9 @@
     <profiles>
         <profile>
             <id>Development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <config.path>classpath:development.properties</config.path>
             </properties>

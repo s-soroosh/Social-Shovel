@@ -23,15 +23,15 @@ public class ScheduledTasks {
 
         @Scheduled(fixedRate = 15000)
     public void doIt() {
-//        System.out.println("Number of sessions: " + SimpleHandler.sessions.size());
-//        for (WebSocketSession s : SimpleHandler.sessions) {
-//            try {
-//                s.sendMessage(new TextMessage("Hello"));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        System.out.println("Hi man, i am from scheduler.");
+            System.out.println("Number of sessions: " + SimpleHandler.sessions.size());
+            for (WebSocketSession s : SimpleHandler.sessions) {
+                try {
+                    s.sendMessage(new TextMessage("Hello"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Hi man, i am from scheduler.");
             template.convertAndSend("dest1",new Message("hi"));
 
     }

@@ -6,7 +6,19 @@
 </head>
 <body>
 <h1 layout:fragment="header">Messages : Create</h1>
-<div layout:fragment="content"></div>
+
+<div layout:fragment="scripts">
+    <script src="/scripts/sockjs.min.js"></script>
+    <script type="text/javascript">
+        var sock = new SockJS("/socket/simple");
+        sock.onmessage = function (m) {
+            $('#container').append('<div>' + m.data + '</div>')
+        }
+    </script>
+</div>
+<div layout:fragment="content">
+    <div id="container"></div>
+</div>
 
 </body>
 </html>

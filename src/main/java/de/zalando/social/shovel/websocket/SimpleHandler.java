@@ -26,4 +26,6 @@ public class SimpleHandler extends TextWebSocketHandler {
         sessions.remove(session);
         super.afterConnectionClosed(session, status);
     }
+
+
 }
