@@ -1,4 +1,4 @@
-package de.zalando.social.shovel.service.specification;
+package de.zalando.social.shovel.service.social.specification;
 
 import de.zalando.social.shovel.service.messaging.Message;
 
