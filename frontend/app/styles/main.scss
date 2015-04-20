@@ -89,3 +89,15 @@ body {
     border-bottom: 0;
   }
 }
+div.bar {
+  display: inline-block;
+  width: 20px;
+  height: 75px;
+  background-color: teal;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+.pumpkin {
+  stroke: red;
+  stroke-width: 5;
+}
