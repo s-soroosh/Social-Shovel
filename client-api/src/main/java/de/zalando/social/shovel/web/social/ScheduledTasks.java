@@ -32,7 +32,7 @@ public class ScheduledTasks {
                 }
             }
             System.out.println("Hi man, i am from scheduler.");
-            template.convertAndSend("dest1",new Message("hi"));
+//            template.convertAndSend("dest1",new Message("hi"));
 
     }
 }
