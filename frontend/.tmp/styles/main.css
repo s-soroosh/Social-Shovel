@@ -8595,5 +8595,18 @@ body {
     border-bottom: 0;
   }
 }
+/* line 92, ../../app/styles/main.scss */
+div.bar {
+  display: inline-block;
+  width: 20px;
+  height: 75px;
+  background-color: teal;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
 
-/*# sourceMappingURL=main.css.map */
+/* line 100, ../../app/styles/main.scss */
+.pumpkin {
+  stroke: red;
+  stroke-width: 5;
+}
