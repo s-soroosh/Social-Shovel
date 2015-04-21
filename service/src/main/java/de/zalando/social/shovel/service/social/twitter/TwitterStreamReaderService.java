@@ -25,8 +25,10 @@ public class TwitterStreamReaderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TwitterStreamReaderService.class);
     @Value("${shovel.twitter.streaming.topics}")
     private String[] topics;
-    @Value("${shovel.twitter.streaming.langs}}")
+    @Value("${shovel.twitter.streaming.langs}")
     private String[] langs;
+    @Value("${shovel.twitter.streaming.enabled}")
+    private boolean enabled;
 
     @Autowired
     private MessageTransformer<Status> messageTransformer;
@@ -36,18 +38,23 @@ public class TwitterStreamReaderService {
 
     @PostConstruct
     public void init(){
-        LOGGER.info("Initilizing twitter service");
-        LOGGER.info("Twitter streaming topics: <{}>",(Object)topics);
-        LOGGER.info("Twitter streaming languages: <{}>", (Object)langs);
+        System.out.println("\n\n ========> WTF" + enabled);
+        if (enabled) {
+            LOGGER.info("Initilizing twitter service");
+            LOGGER.info("Twitter streaming topics: <{}>", (Object) topics);
+            LOGGER.info("Twitter streaming languages: <{}>", (Object) langs);
 
-        TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
-        twitterStream.addListener(new TwitterStatusListener(topics, messageTransformer, publisherService));
+            TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
+            twitterStream.addListener(new TwitterStatusListener(topics, messageTransformer, publisherService));
 
-        FilterQuery filterQuery = new FilterQuery();
-        filterQuery.track(topics);
-        filterQuery.language(langs);
-        twitterStream.filter(filterQuery);
+            FilterQuery filterQuery = new FilterQuery();
+            filterQuery.track(topics);
+            filterQuery.language(langs);
+            twitterStream.filter(filterQuery);
+        } else {
+            LOGGER.debug("\n****** TwitterStreamReaderService is disabled in application.conf   ***** ");
+
+
+        }
     }
-
-
 }
