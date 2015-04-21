@@ -8595,18 +8595,133 @@ body {
     border-bottom: 0;
   }
 }
-/* line 92, ../../app/styles/main.scss */
-div.bar {
-  display: inline-block;
-  width: 20px;
-  height: 75px;
-  background-color: teal;
-  vertical-align: bottom;
-  margin-right: 5px;
+/* line 93, ../../app/styles/main.scss */
+#wrapper {
+  padding-left: 0;
+  transition: all 0.5s ease;
 }
 
-/* line 100, ../../app/styles/main.scss */
-.pumpkin {
-  stroke: red;
-  stroke-width: 5;
+/* line 101, ../../app/styles/main.scss */
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+/* line 105, ../../app/styles/main.scss */
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #f3f3f3;
+  transition: all 0.5s ease;
+}
+
+/* line 120, ../../app/styles/main.scss */
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+/* line 124, ../../app/styles/main.scss */
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+/* line 130, ../../app/styles/main.scss */
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar Styles */
+/* line 137, ../../app/styles/main.scss */
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* line 146, ../../app/styles/main.scss */
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+/* line 151, ../../app/styles/main.scss */
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+
+/* line 157, ../../app/styles/main.scss */
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #000;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* line 163, ../../app/styles/main.scss */
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+/* line 168, ../../app/styles/main.scss */
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+/* line 174, ../../app/styles/main.scss */
+.sidebar-nav > .sidebar-brand a {
+  color: #333;
+}
+
+/* line 178, ../../app/styles/main.scss */
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #999;
+  background: none;
+}
+
+@media (min-width: 768px) {
+  /* line 184, ../../app/styles/main.scss */
+  #wrapper {
+    padding-left: 250px;
+  }
+
+  /* line 188, ../../app/styles/main.scss */
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  /* line 192, ../../app/styles/main.scss */
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  /* line 196, ../../app/styles/main.scss */
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  /* line 200, ../../app/styles/main.scss */
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  /* line 205, ../../app/styles/main.scss */
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
 }

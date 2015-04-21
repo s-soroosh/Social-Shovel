@@ -1,9 +1,11 @@
 package de.zalando.social.shovel.service.messaging;
 
+import java.io.Serializable;
+
 /**
  * Created by soroosh on 4/20/15.
  */
-public class UserInfo {
+public class UserInfo implements Serializable {
     private final String userId;
     private final String name;
     private final String lastName;
