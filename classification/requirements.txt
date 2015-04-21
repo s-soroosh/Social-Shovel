@@ -1,0 +1,3 @@
+# Please add other requirements to this file.
+# Then it is possible to run this file with: pip install -r requirements.txt
+stomp.py
