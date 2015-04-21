@@ -105,14 +105,11 @@ class classifier(object):
 
     def classify(self, unknown_text_vector):
         return self.clf.predict(unknown_text_vector)
+#        return self.regr.predict(unknown_text_vector)
 
 if __name__ == "__main__":
     # ============= training part ============
-    text1 = "zalando is super incredible awesome the best"
-    text2 = "zalando is fucking shit worst shop"
-
     dp = data_preparation()
-    #text_vectors, class_labels = dp.process_train_data([text1, text2], [1,0])
     train_data, train_labels = fetch_traindata.get_data(classification_mode=True)
     text_vectors, class_labels =  dp.process_train_data(train_data, train_labels)
 
@@ -120,7 +117,7 @@ if __name__ == "__main__":
     cls.train(text_vectors, class_labels)
 
     # ============== classification part ======
-    text3 = "I never liked #zalando trying to pronounce the name"# "zalando is fucking incredible awesome"
+    text3 = "I never liked #zalando trying to pronounce the name"
     tvec = dp.process_unclassified_data(text3)
     print tvec
     for i, t in enumerate(tvec):
