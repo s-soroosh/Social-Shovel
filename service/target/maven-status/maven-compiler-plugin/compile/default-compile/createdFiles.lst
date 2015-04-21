@@ -1,0 +1,12 @@
+de/zalando/social/shovel/service/social/twitter/TwitterStatusListener.class
+de/zalando/social/shovel/service/messaging/UserInfo.class
+de/zalando/social/shovel/service/social/specification/MessageTransformer.class
+de/zalando/social/shovel/service/messaging/MessageReceiver.class
+de/zalando/social/shovel/service/messaging/Message$1.class
+de/zalando/social/shovel/service/messaging/Message.class
+de/zalando/social/shovel/service/social/twitter/TwitterMessageTransformer.class
+de/zalando/social/shovel/service/social/JMSMessagePublisher.class
+de/zalando/social/shovel/service/social/twitter/TwitterStreamReaderService.class
+de/zalando/social/shovel/service/configuration/ServiceConfiguration.class
+de/zalando/social/shovel/service/social/specification/MessagePublisher.class
+de/zalando/social/shovel/service/messaging/Message$MessageBuilder.class

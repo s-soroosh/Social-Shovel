@@ -1,0 +1,10 @@
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/social/specification/MessagePublisher.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/social/twitter/TwitterStreamReaderService.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/messaging/Message.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/messaging/UserInfo.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/social/JMSMessagePublisher.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/social/specification/MessageTransformer.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/social/twitter/TwitterStatusListener.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/messaging/MessageReceiver.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/configuration/ServiceConfiguration.java
+/Users/dzharkov/Documents/zalando/social/zalando-demo/service/src/main/java/de/zalando/social/shovel/service/social/twitter/TwitterMessageTransformer.java
