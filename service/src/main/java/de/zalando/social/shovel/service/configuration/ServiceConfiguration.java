@@ -3,6 +3,7 @@ package de.zalando.social.shovel.service.configuration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -13,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 //@EnableScheduling
 @EnableJms
-@ComponentScan({"de.zalando.social.shovel.service.social"})
+@EnableMongoRepositories("de.zalando.social.shovel.service.messaging")
+@ComponentScan({"de.zalando.social.shovel.service.social","de.zalando.social.shovel.service.messaging"})
 public class ServiceConfiguration {
 }

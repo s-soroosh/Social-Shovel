@@ -68,6 +68,12 @@ public class Message implements Serializable {
     private String messageClass;
     private Date postedDate;
 
+    private Message(){
+
+        topics = new String[0];
+        provider = null;
+        content = null;
+    }
     private Message(String content, String provider, String... topics) {
         this.topics = topics;
         this.content = content;
