@@ -3,6 +3,8 @@ package de.zalando.social.shovel.service.social.twitter;
 import de.zalando.social.shovel.service.messaging.Message;
 import de.zalando.social.shovel.service.social.specification.MessagePublisher;
 import de.zalando.social.shovel.service.social.specification.MessageTransformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -11,12 +13,13 @@ import twitter4j.StatusListener;
 /**
  * Created by soroosh on 4/20/15.
  */
-public class TwitterStatusListener implements StatusListener{
+public class TwitterStatusListener implements StatusListener {
+    public static final Logger LOGGER = LoggerFactory.getLogger(TwitterStatusListener.class);
     private final String[] topics;
     private final MessageTransformer<Status> messageTransformer;
     private final MessagePublisher publisherService;
 
-    public TwitterStatusListener(String[] topics,MessageTransformer<Status> messageTransformer, MessagePublisher publisherService){
+    public TwitterStatusListener(String[] topics, MessageTransformer<Status> messageTransformer, MessagePublisher publisherService) {
 
         this.topics = topics;
         this.messageTransformer = messageTransformer;
@@ -51,6 +54,6 @@ public class TwitterStatusListener implements StatusListener{
 
     @Override
     public void onException(Exception e) {
-
+        LOGGER.error("Error on listening...",e);
     }
 }
