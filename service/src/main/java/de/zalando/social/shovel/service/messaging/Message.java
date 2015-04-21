@@ -1,5 +1,7 @@
 package de.zalando.social.shovel.service.messaging;
 
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
@@ -36,6 +38,9 @@ public class Message implements Serializable {
             return this.msg;
         }
     }
+
+    @Id
+    private String id;
 
     private final String[] topics;
     private final String provider;
