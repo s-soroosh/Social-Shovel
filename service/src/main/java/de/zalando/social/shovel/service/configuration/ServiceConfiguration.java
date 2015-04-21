@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @Configuration
-//@EnableScheduling
 @EnableJms
 @EnableMongoRepositories("de.zalando.social.shovel.service.messaging")
 @ComponentScan({"de.zalando.social.shovel.service.social","de.zalando.social.shovel.service.messaging"})

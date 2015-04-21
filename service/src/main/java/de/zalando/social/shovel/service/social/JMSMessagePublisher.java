@@ -1,5 +1,6 @@
 package de.zalando.social.shovel.service.social;
 
+import com.google.gson.Gson;
 import de.zalando.social.shovel.service.messaging.Message;
 import de.zalando.social.shovel.service.social.specification.MessagePublisher;
 
@@ -19,6 +20,7 @@ public class JMSMessagePublisher implements MessagePublisher {
     @Value("${shovel.queue.message.destination}")
     private String destination;
     private static final Logger LOGGER = LoggerFactory.getLogger(JMSMessagePublisher.class);
+    private static final Gson gson = new Gson();
 
     @Autowired
     private JmsTemplate template;
@@ -27,6 +29,8 @@ public class JMSMessagePublisher implements MessagePublisher {
     @Override
     public void publish(Message msg) {
         LOGGER.info("Publishing message:{}", msg);
-        template.convertAndSend(destination, msg);
+
+        String stringifiedObject = gson.toJson(msg);
+        template.convertAndSend(destination, stringifiedObject);
     }
 }
