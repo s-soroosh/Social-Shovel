@@ -14,6 +14,7 @@ import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.awt.*;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by soroosh on 4/20/15.
  */
 @Service
-public class TwitterStreamReaderService implements ApplicationContextAware {
+public class TwitterStreamReaderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(TwitterStreamReaderService.class);
     @Value("${shovel.twitter.streaming.topics}")
     private String[] topics;
@@ -37,10 +38,10 @@ public class TwitterStreamReaderService implements ApplicationContextAware {
 
     @Autowired
     private MessagePublisher publisherService;
-    private ApplicationContext context;
+
 
     @PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("\n\n ========> WTF" + enabled);
         if (enabled) {
             LOGGER.info("Initilizing twitter service");
@@ -50,14 +51,15 @@ public class TwitterStreamReaderService implements ApplicationContextAware {
             twitterStream = new TwitterStreamFactory().getInstance();
             twitterStream.addListener(new TwitterStatusListener(topics, messageTransformer, publisherService));
 
-          FilterQuery filterQuery = new FilterQuery();
-          filterQuery.track(topics);
-          filterQuery.language(new String[]{"en"});
-          twitterStream.filter(filterQuery);
+            FilterQuery filterQuery = new FilterQuery();
+            filterQuery.track(topics);
+            filterQuery.language(new String[]{"en"});
+            twitterStream.filter(filterQuery);
         } else {
             LOGGER.debug("\n****** TwitterStreamReaderService is disabled in application.conf   ***** ");
-        
+
         }
+    }
 
     @PreDestroy
     public void destroy() {
@@ -65,8 +67,5 @@ public class TwitterStreamReaderService implements ApplicationContextAware {
         this.twitterStream.shutdown();
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
-    }
+
 }
