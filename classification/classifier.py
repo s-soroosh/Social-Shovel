@@ -5,12 +5,13 @@ import re
 import math
 
 class data_preparation(object):
-    def __init__(self):
+    def __init__(self, options):
         self.token_mapping = {}
         # for debugging
         self.reverse_token_mapping = {}
         self.token_occurence = {}
         self.num_trainingdocs = 0
+        self.options = options
 
     def process_train_data(self, training_texts, class_labels):
         # tokenize all texts and extract feature-dicts
@@ -56,17 +57,25 @@ class data_preparation(object):
     def tokenize(self, text, bigrams = True):
         # stanford nlp?
         text = text.lower()
+        # treat tags as normal words
         text = text.replace("#", " ")
-        text = text.replace(":)", "smileyhappy")
-        text = text.replace(":-)", "smileyhappy")
-        text = text.replace("=)", "smileyhappy")
-        text = text.replace(":D", "smileyhappy")
-        text = text.replace(":(", "smileysad")
-        text = text.replace(":-(", "smileysad")
-        text = text.replace("=(", "smileysad")
-        text = text.replace(";(", "smileysad")
+        if self.options.get("smileys", True):
+            # make a smiley-feature (happy/sad)
+            text = text.replace(":)", " smileyhappy ")
+            text = text.replace(":-)", " smileyhappy ")
+            text = text.replace("=)", " smileyhappy ")
+            text = text.replace(":D", " smileyhappy ")
+            text = text.replace(":(", " smileysad ")
+            text = text.replace(":-(", " smileysad ")
+            text = text.replace("=(", " smileysad ")
+            text = text.replace(";(", " smileysad ")
+        # remove links
         text = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', text)
+        # remove usernames
+        text = re.sub(r'@[A-Za-z0-9]*', '', text)
+
         tokens = re.findall(r"[\w']+", text)
+        # add bigrams
         if bigrams:
             for i in xrange(0, len(tokens) - 1):
                 tokens.append(tokens[i] + " " + tokens[i + 1])
@@ -107,21 +116,51 @@ class classifier(object):
         return self.clf.predict(unknown_text_vector)
 #        return self.regr.predict(unknown_text_vector)
 
-if __name__ == "__main__":
-    # ============= training part ============
-    dp = data_preparation()
-    train_data, train_labels = fetch_traindata.get_data(classification_mode=True)
+# Trains a classifier to determine the sentiment of a text.
+# The classes are Positive (2), Negative (0) and Neutral(1)
+def train_sentiment():
+    dp = data_preparation(options={})
+    train_data, train_labels = fetch_traindata.get_data()
     text_vectors, class_labels =  dp.process_train_data(train_data, train_labels)
-
+    
     cls = classifier()
     cls.train(text_vectors, class_labels)
 
-    # ============== classification part ======
-    text3 = "I never liked #zalando trying to pronounce the name"
-    tvec = dp.process_unclassified_data(text3)
-    print tvec
+    return dp, cls
+
+# Trains a classifier to determine the topic/category of a text.
+# e.g. if it's about shoes or trousers....
+def train_categorization():
+    #dp = data_preparation(options={"smileys":False})
+    pass
+
+def explain_result(tvec, assigned_class, data_preparation, classifier):
+    print "Further explanation"
+    print
+    print "Document Tokens"
     for i, t in enumerate(tvec):
         if t > 0:
-            print dp.reverse_token_mapping[i], t
-    print cls.classify(tvec)
-     
+            print "\t", dp_sentiment.reverse_token_mapping[i], t
+
+    dims = {}   
+    for i,t in enumerate(cls_sentiment.clf.coef_[0]):
+        if t != 0:
+            dims[dp_sentiment.reverse_token_mapping[i]] = t
+    dims = sorted(dims.items(), key=lambda x: x[1])
+    print "Winning Class Model - 5 strongest modelfeatures pos/neg"
+    print dims[-5:]
+    print dims[0:5]
+
+if __name__ == "__main__":
+    # ============= training part ============
+    dp_sentiment, cls_sentiment = train_sentiment()
+    #dp_category, cls_category = train_categorization()
+
+    # ============== classification part ======
+    text3 = "I never liked #zalando"
+    tvec = dp_sentiment.process_unclassified_data(text3)
+    label = cls_sentiment.classify(tvec)
+    print "Assigned class", label[0]
+    explain_result(tvec, label, dp_sentiment, cls_sentiment)
+   
+ 
