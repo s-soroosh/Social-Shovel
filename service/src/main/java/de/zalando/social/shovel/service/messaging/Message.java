@@ -1,6 +1,7 @@
 package de.zalando.social.shovel.service.messaging;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -11,8 +12,14 @@ public class Message implements Serializable {
     public static class MessageBuilder {
         private final Message msg;
 
-        public MessageBuilder(String content, String provider,String... topics) {
-            this.msg = new Message(content, provider,topics);
+        public MessageBuilder(String content, String provider, String... topics) {
+            ArrayList<String> selectedTopics = new ArrayList<>();
+            for (String t : topics) {
+                if (content.contains(t)) {
+                    selectedTopics.add(t);
+                }
+            }
+            this.msg = new Message(content, provider, (String[]) selectedTopics.toArray());
         }
 
         public MessageBuilder withLang(String lang) {
@@ -44,13 +51,13 @@ public class Message implements Serializable {
     private UserInfo userInfo;
     private Date postedDate;
 
-    private Message(String content, String provider,String... topics) {
+    private Message(String content, String provider, String... topics) {
         this.topics = topics;
         this.content = content;
         this.provider = provider;
     }
 
-    public Message(String content, String language, UserInfo userInfo, String provider, Date postedDate,String... topics) {
+    public Message(String content, String language, UserInfo userInfo, String provider, Date postedDate, String... topics) {
         this.topics = topics;
         this.content = content;
         this.language = language;

@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan({"de.zalando.social.shovel.web", "de.zalando.social.shovel.web.configuration"})
-//@EnableScheduling
+@EnableScheduling
 @Import({ServiceConfiguration.class})
 public class ZalandoDemoApplication
 //{
@@ -39,6 +39,6 @@ public class ZalandoDemoApplication
     public void run(String... strings) throws Exception {
 //        this.repository.insert(new Customer("soroosh","sarabadani"));
 //        this.repository.findAll();
-        this.template.convertAndSend("dest1","soroosh");
+//        this.template.convertAndSend("dest1","soroosh");
     }
 }

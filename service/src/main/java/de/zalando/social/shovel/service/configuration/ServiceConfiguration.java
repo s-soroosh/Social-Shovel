@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * Created by soroosh on 4/20/15.
  */
 @Configuration
-@EnableScheduling
+//@EnableScheduling
 @EnableJms
 @ComponentScan({"de.zalando.social.shovel.service.social"})
 public class ServiceConfiguration {

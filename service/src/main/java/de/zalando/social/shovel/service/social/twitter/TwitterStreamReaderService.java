@@ -21,7 +21,7 @@ import java.util.List;
  * Created by soroosh on 4/20/15.
  */
 @Service
-public class TwitterStreamReaderService {
+public class TwitterStreamReaderService implements ApplicationContextAware {
     private static final Logger LOGGER = LoggerFactory.getLogger(TwitterStreamReaderService.class);
     @Value("${shovel.twitter.streaming.topics}")
     private String[] topics;
@@ -30,11 +30,14 @@ public class TwitterStreamReaderService {
     @Value("${shovel.twitter.streaming.enabled}")
     private boolean enabled;
 
+    TwitterStream twitterStream;
+
     @Autowired
     private MessageTransformer<Status> messageTransformer;
 
     @Autowired
     private MessagePublisher publisherService;
+    private ApplicationContext context;
 
     @PostConstruct
     public void init(){
@@ -44,17 +47,26 @@ public class TwitterStreamReaderService {
             LOGGER.info("Twitter streaming topics: <{}>", (Object) topics);
             LOGGER.info("Twitter streaming languages: <{}>", (Object) langs);
 
-            TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
+            twitterStream = new TwitterStreamFactory().getInstance();
             twitterStream.addListener(new TwitterStatusListener(topics, messageTransformer, publisherService));
 
-            FilterQuery filterQuery = new FilterQuery();
-            filterQuery.track(topics);
-            filterQuery.language(langs);
-            twitterStream.filter(filterQuery);
+          FilterQuery filterQuery = new FilterQuery();
+          filterQuery.track(topics);
+          filterQuery.language(new String[]{"en"});
+          twitterStream.filter(filterQuery);
         } else {
             LOGGER.debug("\n****** TwitterStreamReaderService is disabled in application.conf   ***** ");
-
-
+        
         }
+
+    @PreDestroy
+    public void destroy() {
+        LOGGER.info("Shutting down twitter stream");
+        this.twitterStream.shutdown();
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
     }
 }
