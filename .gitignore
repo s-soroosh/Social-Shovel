@@ -1,4 +1,6 @@
-target
+frontend/target
+client-api/target
+service/target
 frontend/bower_components
 frontend/node_modules
 frontend/.sass-cache
