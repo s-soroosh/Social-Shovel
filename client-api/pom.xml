@@ -17,6 +17,12 @@
     </parent>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
         <!-- Inner dependencies -->
         <dependency>
             <groupId>de.zalando.social.shovel</groupId>
