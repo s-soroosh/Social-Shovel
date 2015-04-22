@@ -1,7 +1,8 @@
 package de.zalando.social.shovel.web.social;
 
 import com.google.gson.Gson;
-import de.zalando.social.shovel.web.Fake.StaticMessageGenerator;
+import de.zalando.social.shovel.service.messaging.Message;
+import de.zalando.social.shovel.web.Fake.MessagesGenerator;
 import de.zalando.social.shovel.web.websocket.SimpleHandler;
 import de.zalando.social.shovel.web.websocket.messages.StatisticMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,9 @@ import java.util.Random;
 @Component
 public class ScheduledTasks {
 
-    @Autowired
-    private JmsTemplate template;
-
     private Gson gson = new Gson();
     private Random random = new Random();
-
-    @Scheduled(fixedRate = 1000)
-    public void doIt() {
+    private void sleep() {
         try {
             // wait random time
             int sleepingTime = 1000 * random.nextInt(1100) / 100;
@@ -36,12 +32,8 @@ public class ScheduledTasks {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        StatisticMessage mes = StaticMessageGenerator.getInstance().generate();
-        String log = "Fake messages, msg : " + mes + "\n" +
-                "Number of sessions: " + SimpleHandler.sessions.size();
-
-        System.out.println(log);
-        TextMessage message = new TextMessage(gson.toJson(mes));
+    }
+    private void sendMessageToAll(TextMessage message) {
         for (WebSocketSession s : SimpleHandler.sessions) {
             try {
                 s.sendMessage(message);
@@ -50,4 +42,30 @@ public class ScheduledTasks {
             }
         }
     }
+
+    @Scheduled(fixedRate = 1000)
+    public void doIt() {
+        sleep();
+        StatisticMessage mes = MessagesGenerator.getInstance().generate();
+        String log = "Fake messages, msg : " + mes + "\n" +
+                      "Number of sessions: " + SimpleHandler.sessions.size();
+
+        System.out.println(log);
+        TextMessage message = new TextMessage(gson.toJson(mes));
+        sendMessageToAll(message);
+    }
+
+    // tweets
+    @Scheduled(fixedRate = 1000)
+    public void doTweet() {
+        sleep();
+        Message tweet = MessagesGenerator.getInstance().generateMessage();
+        String log = "Fake messages, tweet : " + tweet + "\n" +
+                "Number of sessions: " + SimpleHandler.sessions.size();
+
+        System.out.println(log);
+        TextMessage message = new TextMessage(gson.toJson(tweet));
+        sendMessageToAll(message);
+    }
+
 }
