@@ -8,37 +8,43 @@
  * Controller of the zssApp
  */
 angular.module('zssApp')
-  .controller('MainCtrl', function ($scope) {
-      var dataset = [
-        { label: 'Abulia', count: 10 },
-        { label: 'Betelgeuse', count: 20 },
-        { label: 'Cantaloupe', count: 30 },
-        { label: 'Dijkstra', count: 40 }
-      ];
-      var width = 360;
-      var height = 360;
-      var radius = Math.min(width, height) / 2;
-      var color = d3.scale.category20b();
+  .controller('MainCtrl', function ($scope,$websocket,DataService) {
+        var dataStream = $websocket('ws://localhost:9090/socket/simple');
+            $scope.data = DataService.data;
+            $scope.countryData = DataService.countryData;
+            $scope.collection = [];
 
-      var svg = d3.select('#genralData')
-          .append('svg')
-          .attr('width', width)
-          .attr('height', height)
-          .append('g')
-          .attr('transform', 'translate(' + (width / 2) +  ',' + (height / 2) + ')');
 
-      var arc = d3.svg.arc()
-          .outerRadius(radius);
-      var pie = d3.layout.pie()
-          .value(function(d) { return d.count; })
-          .sort(null);
-      var path = svg.selectAll('path')
-          .data(pie(dataset))
-          .enter()
-          .append('path')
-          .attr('d', arc)
-          .attr('fill', function(d, i) {
-            return color(d.data.label);
-          });
+        $scope.processMessage = function(message) {
+            if(message.category=="positive") {
+                $scope.data[0]+=message.count;
+            } else if(message.category=="neutrall") {
+                $scope.data[1]+=message.count;
+            } else {
+                $scope.data[2]+=message.count;
+            }
+            if(message.category=="positive") {
+
+                 if(message.country=="DEU") {
+                 $scope.countryData[0]+=message.count;
+                 } else if(message.country=="NLD") {
+                 $scope.countryData[1]+=message.count;
+                 } else {
+                 $scope.countryData[2]+=message.count;
+                 }
+
+            }
+            console.log(message);
+            $scope.collection.push(message);
+        };
+
+        dataStream.onMessage(function(message) {
+            $scope.processMessage(JSON.parse(message.data));
+        });
+
+
+        $scope.labels = ["Positive", "Neutral", "Negative"];
+        $scope.countryLabels = ["Deutschland", "Netherlands", "France"];
+        $scope.colors=['rgba(151,187,205,1)','rgba(220,220,220,1)','rgba(247,70,74,1)'];
 
     });

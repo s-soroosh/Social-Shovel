@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
       'ngWebSocket',
-    'ngTouch'
+    'ngTouch',
+      'chart.js'
   ])
   .config(function ($routeProvider) {
     $routeProvider

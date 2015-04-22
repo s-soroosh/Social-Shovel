@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -28,11 +29,11 @@
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
             <a href="#">
-             Zalando Social
+              <img src="https://static.zalando.de/media/teaser/logo/zalando-logo.png" width="143px" alt="Mode und Schuhe bei Zalando.de" class="">
             </a>
           </li>
           <li>
-            <a href="#">Dashboard</a>
+            <a ng-href="/#/">Dashboard</a>
           </li>
           <li>
             <a ng-href="/#/maps">Map</a>
@@ -48,7 +49,7 @@
       <!-- /#sidebar-wrapper -->
 
       <!-- Page Content -->
-      <div id="page-content-wrapper">
+      <div id="page-content-wrapper  remove-spaces">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
@@ -79,14 +80,17 @@
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="bower_components/angular-websocket/angular-websocket.min.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/maps.js"></script>
+        <script src="scripts/services/dataservice.js"></script>
         <!-- endbuild -->
 
     <script>

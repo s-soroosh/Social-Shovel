@@ -1,1 +1,89 @@
-<div id="genralData"></div>
+<div class="page-header remove-spaces">
+        <h1>Dashboard</h1>
+</div>
+<div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Latest tweets</div>
+
+
+        <table class="table table-striped">
+                <thead>
+                <tr>
+                        <th>Username</th>
+                        <th>Source</th>
+                        <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                </tr>
+                <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                </tr>
+                <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                </tr>
+                <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                </tr>
+                <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                </tr>
+                <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                </tr>
+                <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                </tr>
+                <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                </tr>
+                <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                </tr>
+                </tbody>
+        </table>
+</div>
+<div class="row">
+        <div class="col-md-6">
+                <div class="panel panel-primary">
+                        <div class="panel-heading">General user satisfaction</div>
+                        <div class="panel-body">
+                                <div><span class="label label-info label-space" ng-style="{'background-color':colors[$index]}" ng-repeat="label in labels">{{label}}</span></div>
+                                <canvas id="pie" class="chart chart-pie" data="data"
+                                        labels="labels"></canvas>
+                        </div>
+                </div>
+                      </div>
+        <div class="col-md-6">
+                        <div class="panel panel-primary">
+                                <div class="panel-heading">Countries positive satisfaction</div>
+                                <div class="panel-body">
+                                       <div><span class="label label-info  label-space" ng-style="{'background-color':colors[$index]}" ng-repeat="label in countryLabels">{{label}}</span></div>
+                                        <canvas id="pie" class="chart chart-pie" data="countryData"
+                                                labels="countryLabels"></canvas>
+                                </div>
+                        </div>
+                </div>
+
+
+</div>

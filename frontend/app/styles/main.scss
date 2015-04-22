@@ -28,14 +28,15 @@ body {
   margin-bottom: 10px;
 
   /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
 
+
+}
+h1, h2, h3, h4, h5, h6, div, strong, p, i, b, em, a, address, input, select, textarea, label, button {
+  color: #404040;
+  font-family: arial,helvetica,"DejaVu Sans","Arial Unicode MS","Lucida Sans Unicode",sans-serif;
+  font-style: normal;
+  text-decoration: none;
+}
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -157,7 +158,7 @@ body {
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #000;
-  background: rgba(255,255,255,0.2);
+  background: #bebebe;
 }
 
 .sidebar-nav li a:active,
@@ -206,4 +207,10 @@ body {
     position: relative;
     margin-right: 0;
   }
+}
+.label-space {
+ margin-right: 10px;
+}
+.remove-spaces {
+  margin-top: 0px;
 }
