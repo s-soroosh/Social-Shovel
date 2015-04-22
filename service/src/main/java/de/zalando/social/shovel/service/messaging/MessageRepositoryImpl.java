@@ -1,23 +1,15 @@
 package de.zalando.social.shovel.service.messaging;
 
-import com.mongodb.DBObject;
 import de.zalando.social.shovel.service.criteria.AggregateCriteria;
-import de.zalando.social.shovel.service.criteria.CriteriaStats;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 /**
  * Created by vvenkatraman on 21/04/15.
@@ -25,27 +17,28 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 public class MessageRepositoryImpl implements MessageRepositoryCustom {
 
     @Autowired
-    private MongoOperations operations;
-
-    @Autowired
     private MongoTemplate mongoTemplate;
 
-
-
     @Override
-    public DBObject aggrMsg(AggregateCriteria criteria) {
-//        Aggregation aggregation = Aggregation.newAggregation(Message.class,
-//                group(criteria.getValue()).count().as("n")
-//        );
-//
-//        AggregationResults<CriteriaStats> results = operations.aggregate(aggregation, "message", CriteriaStats.class);
+    public Map<String, Double> aggrCount(AggregateCriteria criteria) {
+        return compute(criteria.getValue());
+    }
 
-//        return results.getMappedResults();
-        GroupByResults<Message> results = mongoTemplate.group("group_test_collection",
-                GroupBy.key("provider").initialDocument("{ count: 0 }").reduceFunction("function(doc, prev) { prev.count += 1 }"),
-                Message.class);
+    private Map<String, Double> compute(String criteria) {
+        GroupByResults<HashMap> groupedResults = mongoTemplate.group("message",
+                GroupBy.key(criteria).initialDocument("{ count: 0 }").reduceFunction("function(doc, prev) { prev.count += 1 }"),
+                HashMap.class);
 
-        DBObject res = results.getRawResults();
-        return res;
+        System.out.println(groupedResults.getRawResults());
+        HashMap<String, Double> results = new HashMap<>();
+
+        Iterator<HashMap> it = groupedResults.iterator();
+        while(it.hasNext()) {
+            HashMap<String, Object> map = it.next();
+            System.out.println(map);
+            results.put(map.get(criteria).toString(), (Double)map.get("count"));
+        }
+        System.out.println(results);
+        return results;
     }
 }

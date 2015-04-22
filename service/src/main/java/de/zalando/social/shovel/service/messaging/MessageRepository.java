@@ -1,7 +1,6 @@
 package de.zalando.social.shovel.service.messaging;
 
 import de.zalando.social.shovel.service.criteria.AggregateCriteria;
-import de.zalando.social.shovel.service.criteria.CriteriaStats;
 import de.zalando.social.shovel.service.messaging.Message;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
