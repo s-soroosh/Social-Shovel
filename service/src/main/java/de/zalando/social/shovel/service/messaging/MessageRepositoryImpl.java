@@ -29,7 +29,7 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
                 GroupBy.key(criteria).initialDocument("{ count: 0 }").reduceFunction("function(doc, prev) { prev.count += 1 }"),
                 HashMap.class);
 
-        System.out.println(groupedResults.getRawResults());
+
         HashMap<String, Double> results = new HashMap<>();
 
         Iterator<HashMap> it = groupedResults.iterator();
@@ -38,7 +38,7 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
             System.out.println(map);
             results.put(map.get(criteria).toString(), (Double)map.get("count"));
         }
-        System.out.println(results);
+
         return results;
     }
 }
