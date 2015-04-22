@@ -16,8 +16,9 @@ public class MessageReaderService {
 
     @JmsListener(destination = "${shovel.queue.message.destination}")
     public void onMessage(String msg){
-        System.out.println(msg);
         Message message = gson.fromJson(msg, Message.class);
-        this.repository.insert(message);
+        if(!this.repository.exists(message.getId())) {
+            this.repository.save(message);
+        }
     }
 }
