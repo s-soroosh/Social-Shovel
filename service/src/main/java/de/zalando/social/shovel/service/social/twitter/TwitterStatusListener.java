@@ -29,6 +29,7 @@ public class TwitterStatusListener implements StatusListener {
     @Override
     public void onStatus(Status status) {
         Message transformedMessage = messageTransformer.transform(status, topics);
+
         this.publisherService.publish(transformedMessage);
     }
 

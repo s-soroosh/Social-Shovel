@@ -12,6 +12,11 @@ import java.util.UUID;
  * Created by SOROOSH on 4/19/15.
  */
 public class Message implements Serializable {
+
+    public String getCountry() {
+        return country;
+    }
+
     public enum UserOpinion {
         SATISFIED,
         NEUTRAL,
@@ -50,6 +55,11 @@ public class Message implements Serializable {
             return this;
         }
 
+        public MessageBuilder at(String country){
+            this.msg.country = country;
+            return this;
+        }
+
         public Message build() {
             return this.msg;
         }
@@ -61,6 +71,7 @@ public class Message implements Serializable {
     private final String[] topics;
     private final String provider;
     private final String content;
+    private String country;
     private String language;
     private UserInfo userInfo;
     private Message.UserOpinion userOpinion;

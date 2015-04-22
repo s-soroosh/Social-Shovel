@@ -53,7 +53,7 @@ public class TwitterStreamReaderService {
 
             FilterQuery filterQuery = new FilterQuery();
             filterQuery.track(topics);
-            filterQuery.language(new String[]{"en"});
+//            filterQuery.language(new String[]{"en"});
             twitterStream.filter(filterQuery);
         } else {
             LOGGER.debug("\n****** TwitterStreamReaderService is disabled in application.conf   ***** ");
