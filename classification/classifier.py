@@ -133,7 +133,7 @@ class classifier(object):
 # The classes are Positive (2), Negative (0) and Neutral(1)
 def train_sentiment(evaluate=False):
     dp = data_preparation(options={})
-    train_data, train_labels = fetch_traindata.get_data()
+    train_data, train_labels = fetch_traindata.get_data("train_data.txt")
     text_vectors, class_labels = dp.process_train_data(train_data, train_labels)
     
     cls = classifier()
@@ -148,7 +148,7 @@ def train_sentiment(evaluate=False):
 # e.g. if it's about shoes or trousers....
 def train_categorization(evaluate=False):
     dp = data_preparation(options={"smileys":False})
-    train_data, train_labels = fetch_traindata.get_fashion_data()
+    train_data, train_labels = fetch_traindata.get_data("train_fashion_data.txt")
     text_vectors, class_labels = dp.process_train_data(train_data, train_labels)
     
     cls = classifier()
@@ -181,43 +181,24 @@ def explain_result(tvec, assigned_class, data_preparation, classifier):
         print dims[-5:]
         print dims[0:5]
 
-def explain_fashion_result(tvec, assigned_class, data_preparation, classifier):
-    print "Further explanation"
-    print
-    print "Document Tokens"
-    for i, t in enumerate(tvec2):
-        if t > 0:
-            print "\t", dp_category.reverse_token_mapping[i], t
-
-    for model_index in [0]:
-        dims = {}
-        for i,t in enumerate(cls_category.clf.coef_[model_index]):
-            if t != 0:
-                dims[dp_category.reverse_token_mapping[i]] = t
-        dims = sorted(dims.items(), key=lambda x: x[1])
-        print "Class Model %d - 5 strongest modelfeatures pos/neg" % model_index
-        print dims[-5:]
-        print dims[0:5]
-
 # ============= training part ============
 dp_sentiment, cls_sentiment = train_sentiment(evaluate=True)
-dp_category, cls_category = train_categorization(evaluate=True)
+dp_category, cls_category = train_categorization(evaluate=False)
 
 # ============== classification part ======
 print "Example"
-text3 = "i love zalando"
-print text3
-tvec = dp_sentiment.process_unclassified_data(text3)
+text = "i love zalando"
+print text
+tvec = dp_sentiment.process_unclassified_data(text)
 label = cls_sentiment.classify(tvec)
 print "Assigned class", label
 explain_result(tvec, label, dp_sentiment, cls_sentiment)
 print "\n\n"
 
 print "Example 2"
-text4 = "Look at my new RayBan"
-print text3
-tvec2 = dp_category.process_unclassified_data(text4)
-label = cls_category.classify(tvec2)
+text = "Look at my awesome wedding dress"
+print text
+tvec = dp_category.process_unclassified_data(text)
+label = cls_category.classify(tvec)
 print "Assigned class", label
-explain_fashion_result(tvec2, label, dp_category, cls_category)
 print "\n\n"

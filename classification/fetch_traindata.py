@@ -1,5 +1,5 @@
-def get_data():
-    source = file("train_data.txt", "rb")
+def get_data(filename):
+    source = file(filename, "rb")
     data = []
     labels = []
     for l in source:
@@ -9,4 +9,4 @@ def get_data():
             label = int(entry[1].strip())
             labels.append(label)
     return data, labels
-            
+
