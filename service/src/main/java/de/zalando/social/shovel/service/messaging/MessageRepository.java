@@ -19,7 +19,7 @@ public interface MessageRepository extends MongoRepository<Message, String>, Mes
     public List<Message> findByLanguage(String lang);
     public List<Message> findByUserInfo(String userHandle);
     public List<Message> findByPostedDate(Date date);
-    public List<Message> findByLocation(String location);
+    public List<Message> findByCountry(String location);
     public List<Message> findByUserOpinion(Message.UserOpinion opinion);
     public List<Message> findByClass(String messageClass);
 

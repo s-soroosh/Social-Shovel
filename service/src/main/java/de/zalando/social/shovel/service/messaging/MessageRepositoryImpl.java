@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -21,21 +22,15 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 /**
  * Created by vvenkatraman on 21/04/15.
  */
-public class MessageRepositoryCustomImpl implements MessageRepositoryCustom {
+public class MessageRepositoryImpl implements MessageRepositoryCustom {
 
-
-    private final MongoOperations operations;
+    @Autowired
+    private MongoOperations operations;
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
 
-    public MessageRepositoryCustomImpl(MongoOperations operations) {
-        if(operations == null) {
-            throw new IllegalArgumentException("Operations cannot be null!");
-        }
-        this.operations = operations;
-    }
 
     @Override
     public DBObject aggrMsg(AggregateCriteria criteria) {
