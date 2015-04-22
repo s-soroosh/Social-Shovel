@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by SOROOSH on 4/19/15.
@@ -80,6 +81,7 @@ public class Message implements Serializable {
         this.provider = provider;
         this.userOpinion = UserOpinion.NEUTRIAL;
         this.messageClass = "";
+        this.id= UUID.randomUUID().toString();
     }
 
     public Message(String content, String language, UserInfo userInfo, String provider, Date postedDate, String... topics) {
@@ -91,6 +93,7 @@ public class Message implements Serializable {
         this.postedDate = postedDate;
         this.userOpinion = UserOpinion.NEUTRIAL;
         this.messageClass = "";
+        this.id= UUID.randomUUID().toString();
     }
 
     public void changeUserOpinion(Message.UserOpinion opinion) {
