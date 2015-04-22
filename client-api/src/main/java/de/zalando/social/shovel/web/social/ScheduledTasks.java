@@ -1,12 +1,11 @@
 package de.zalando.social.shovel.web.social;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import de.zalando.social.shovel.service.messaging.Message;
 import de.zalando.social.shovel.web.Fake.MessagesGenerator;
 import de.zalando.social.shovel.web.websocket.SimpleHandler;
 import de.zalando.social.shovel.web.websocket.messages.StatisticMessage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -23,6 +22,7 @@ public class ScheduledTasks {
 
     private Gson gson = new Gson();
     private Random random = new Random();
+
     private void sleep() {
         try {
             // wait random time
@@ -33,6 +33,7 @@ public class ScheduledTasks {
             e.printStackTrace();
         }
     }
+
     private void sendMessageToAll(TextMessage message) {
         for (WebSocketSession s : SimpleHandler.sessions) {
             try {
@@ -43,29 +44,35 @@ public class ScheduledTasks {
         }
     }
 
-    @Scheduled(fixedRate = 1000)
-    public void doIt() {
-        sleep();
-        StatisticMessage mes = MessagesGenerator.getInstance().generate();
-        String log = "Fake messages, msg : " + mes + "\n" +
-                      "Number of sessions: " + SimpleHandler.sessions.size();
+    private String getMessageType(Object message) throws Exception {
+        if (message instanceof Message) return "tweet";
+        if (message instanceof StatisticMessage) return "statistic";
+        throw new Exception("Unsupported message");
+    }
 
+    private void sendMessage(Object message) throws Exception {
+        sleep();
+        String type = getMessageType(message);
+        JsonObject object = (JsonObject) gson.toJsonTree(message);
+        object.addProperty("type", type);
+
+
+        String log = "Number of sessions: " + SimpleHandler.sessions.size() +
+                "\nmessage: " + object;
         System.out.println(log);
-        TextMessage message = new TextMessage(gson.toJson(mes));
-        sendMessageToAll(message);
+        sendMessageToAll(new TextMessage(object.toString()));
     }
 
     // tweets
     @Scheduled(fixedRate = 1000)
-    public void doTweet() {
-        sleep();
-        Message tweet = MessagesGenerator.getInstance().generateMessage();
-        String log = "Fake messages, tweet : " + tweet + "\n" +
-                "Number of sessions: " + SimpleHandler.sessions.size();
+    public void doTweet() throws Exception {
+        sendMessage(MessagesGenerator.getInstance().generateMessage());
+    }
 
-        System.out.println(log);
-        TextMessage message = new TextMessage(gson.toJson(tweet));
-        sendMessageToAll(message);
+    // statistick
+    @Scheduled(fixedRate = 1000)
+    public void doIt() throws Exception {
+        sendMessage(MessagesGenerator.getInstance().generateStatisticMessage());
     }
 
 }
