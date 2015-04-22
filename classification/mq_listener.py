@@ -18,7 +18,7 @@ class ClassificationListener(object):
         print('received an error %s' % message)
 
     def on_message(self, headers, message):
-        print('% received' % message)
+        print('%s received' % message)
         message_dict = json.loads(message)
         text = message_dict['content']
         lang = message_dict['language']
