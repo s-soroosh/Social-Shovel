@@ -1,5 +1,7 @@
 from sklearn import svm
 from sklearn import linear_model
+from sklearn import cross_validation
+import numpy as np
 import fetch_traindata
 import re
 import math
@@ -118,13 +120,16 @@ class classifier(object):
 
 # Trains a classifier to determine the sentiment of a text.
 # The classes are Positive (2), Negative (0) and Neutral(1)
-def train_sentiment():
+def train_sentiment(evaluate=False):
     dp = data_preparation(options={})
     train_data, train_labels = fetch_traindata.get_data()
-    text_vectors, class_labels =  dp.process_train_data(train_data, train_labels)
+    text_vectors, class_labels = dp.process_train_data(train_data, train_labels)
     
     cls = classifier()
     cls.train(text_vectors, class_labels)
+
+    if evaluate:
+        evaluate_classifier(cls, text_vectors, class_labels)
 
     return dp, cls
 
@@ -134,6 +139,10 @@ def train_categorization():
     #dp = data_preparation(options={"smileys":False})
     pass
 
+def evaluate_classifier(classifier, text_vectors, class_labels, fold=5):
+    scores = cross_validation.cross_val_score(classifier.clf, np.matrix(text_vectors), np.array(class_labels), cv=fold)
+    print scores
+
 def explain_result(tvec, assigned_class, data_preparation, classifier):
     print "Further explanation"
     print
@@ -142,25 +151,25 @@ def explain_result(tvec, assigned_class, data_preparation, classifier):
         if t > 0:
             print "\t", dp_sentiment.reverse_token_mapping[i], t
 
-    dims = {}   
-    for i,t in enumerate(cls_sentiment.clf.coef_[0]):
-        if t != 0:
-            dims[dp_sentiment.reverse_token_mapping[i]] = t
-    dims = sorted(dims.items(), key=lambda x: x[1])
-    print "Winning Class Model - 5 strongest modelfeatures pos/neg"
-    print dims[-5:]
-    print dims[0:5]
+    for model_index in [0]:
+        dims = {}
+        for i,t in enumerate(cls_sentiment.clf.coef_[model_index]):
+            if t != 0:
+                dims[dp_sentiment.reverse_token_mapping[i]] = t
+        dims = sorted(dims.items(), key=lambda x: x[1])
+        print "Class Model %d - 5 strongest modelfeatures pos/neg" % model_index
+        print dims[-5:]
+        print dims[0:5]
 
 if __name__ == "__main__":
     # ============= training part ============
-    dp_sentiment, cls_sentiment = train_sentiment()
+    dp_sentiment, cls_sentiment = train_sentiment(evaluate=True)
     #dp_category, cls_category = train_categorization()
 
     # ============== classification part ======
-    text3 = "I never liked #zalando"
+    text3 = "i hate zalando shit "#"I never liked #zalando"
     tvec = dp_sentiment.process_unclassified_data(text3)
     label = cls_sentiment.classify(tvec)
     print "Assigned class", label[0]
     explain_result(tvec, label, dp_sentiment, cls_sentiment)
-   
- 
+

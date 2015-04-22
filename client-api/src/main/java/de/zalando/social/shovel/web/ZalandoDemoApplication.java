@@ -17,16 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan({"de.zalando.social.shovel.web", "de.zalando.social.shovel.web.configuration"})
 @EnableScheduling
 @Import({ServiceConfiguration.class})
-public class ZalandoDemoApplication
-//{
-        implements CommandLineRunner
- {
-
-    @Autowired
-    private CustomerRepository repository;
-
-    @Autowired
-    private JmsTemplate template;
+public class ZalandoDemoApplication{
 
 
 
@@ -35,10 +26,4 @@ public class ZalandoDemoApplication
 
     }
 
-    @Override
-    public void run(String... strings) throws Exception {
-//        this.repository.insert(new Customer("soroosh","sarabadani"));
-//        this.repository.findAll();
-//        this.template.convertAndSend("dest1","soroosh");
-    }
 }
