@@ -9,4 +9,15 @@ def get_data():
             label = int(entry[1].strip())
             labels.append(label)
     return data, labels
-            
+
+def get_fashion_data():
+    source = file("train_fashion_data.txt", "rb")
+    data = []
+    labels = []
+    for l in source:
+        entry = l.split("%%%")
+        if len(entry) == 2:
+            data.append(entry[0])
+            label = int(entry[1].strip())
+            labels.append(label)
+    return data, labels            

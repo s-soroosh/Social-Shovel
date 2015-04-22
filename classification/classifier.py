@@ -214,7 +214,7 @@ explain_result(tvec, label, dp_sentiment, cls_sentiment)
 print "\n\n"
 
 print "Example 2"
-text4 = "Look at my new RayBan"
+text4 = "Look at my new Levis's"
 print text3
 tvec2 = dp_category.process_unclassified_data(text4)
 label = cls_category.classify(tvec2)
