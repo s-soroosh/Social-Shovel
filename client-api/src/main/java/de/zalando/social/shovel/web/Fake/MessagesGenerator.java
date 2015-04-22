@@ -72,7 +72,7 @@ public class MessagesGenerator {
     private Message.UserOpinion generateUserOpinion() {
         int val = random.nextInt(1000);
         if (val < 3300)
-            return Message.UserOpinion.NEUTRIAL;
+            return Message.UserOpinion.NEUTRAL;
         if (val < 6600)
             return Message.UserOpinion.SATISFIED;
         return Message.UserOpinion.UNSATISFIED;
@@ -88,7 +88,7 @@ public class MessagesGenerator {
                 generateTopics());
 
         Message.UserOpinion opinion = generateUserOpinion();
-        if(opinion != Message.UserOpinion.NEUTRIAL)
+        if(opinion != Message.UserOpinion.NEUTRAL)
             m.changeUserOpinion(opinion);
 
         return m;
