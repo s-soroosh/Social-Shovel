@@ -6,6 +6,7 @@ import de.zalando.social.shovel.service.messaging.MessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,8 +19,10 @@ public class ClassificationListener {
     @Autowired
     private MessageRepository messageRepository;
 
+    @JmsListener(destination = "${shovel.queue.message.out.destination}")
     public void onMessage(String message) {
         Message msg = gson.fromJson(message, Message.class);
+        LOGGER.info("Updating message with id:{}, new opinion:{}, new classification:{}",msg.getId(),msg.getUserOpinion(),msg.getMessageClass());
         this.messageRepository.save(msg);
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableJms
 @EnableMongoRepositories("de.zalando.social.shovel.service.messaging")
-@ComponentScan({"de.zalando.social.shovel.service.social","de.zalando.social.shovel.service.messaging"})
+@ComponentScan({"de.zalando.social.shovel.service.social", "de.zalando.social.shovel.service.messaging",
+        "de.zalando.social.shovel.service.classification"})
 public class ServiceConfiguration {
 }
