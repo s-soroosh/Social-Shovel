@@ -17,6 +17,7 @@ public class MessagesGenerator {
     private String[] providers = null;
     private String[] names = null;
     private String[] lastNames = null;
+    private String[] satisfactions = null;
 
     private Random random = new Random();
 
@@ -25,9 +26,9 @@ public class MessagesGenerator {
         return instance;
     }
 
-    public StatisticMessage generate() {
+    public StatisticMessage generateStatisticMessage() {
         return new StatisticMessage(
-                getRandomString(categories),
+                getRandomString(satisfactions),
                 getRandomString(providers),
                 random.nextInt(100),
                 1,
@@ -42,6 +43,7 @@ public class MessagesGenerator {
         countries = "DEU,NLD,FRA,CZE".split(",");
         languages = "DE,EN".split(",");
         providers = "TWITTER,FACEBOOK".split(",");
+        satisfactions = "positive,negative,neutral".split(",");
         names = "Alex,Mike,Soroosh,Frank,Dmitry,Vasanth,Bob,Jonh,Phil".split(",");
         lastNames = "Hans,Fritz,Mueller,Williams, Jackson, Robinson, Harris, Davis, Brow".split(",");
     }
@@ -91,6 +93,4 @@ public class MessagesGenerator {
 
         return m;
     }
-
-
 }
