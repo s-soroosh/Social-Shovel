@@ -5,11 +5,12 @@ import server
 import config
 import json
 import stomp
+import classifier
 
-
-class MyListener(object):
+class ClassificationListener(object):
     def __init__(self, con):
         self.con = con
+        self.opinions = { 0 : "UNSATISFIED", 1 : "SATISFIED", 2 : "NEUTRAL" }
 
     def on_error(self, headers, message):
         json.load(message)
@@ -18,11 +19,22 @@ class MyListener(object):
     def on_message(self, headers, message):
         print('% received' % message)
         message_dict = json.loads(message)
-        # SATISFIED,
-        # NEUTRIAL,
-        # UNSATISFIED
-        message_dict['userOpinion'] = 'SATISFIED'
-        #Write some constants
+        text = message_dict['content']
+
+        # opinion classification
+        tvec = classifier.dp_sentiment.process_unclassified_data(text)
+        label = classifier.cls_sentiment.classify(tvec)
+        label_name = self.opinions[label[0]]
+
+        # category classification
+        
+
+        print "tweet: ", text
+        print "opinion: ", label_name
+        print "category: "
+        print
+
+        message_dict['userOpinion'] = label_name
         message_dict['messageClass'] = 'SHOE'
         serialized_obj = json.dumps(message_dict)
 
@@ -30,7 +42,7 @@ class MyListener(object):
 
 
 conn = stomp.Connection()
-conn.set_listener('', MyListener(conn))
+conn.set_listener('', ClassificationListener(conn))
 conn.start()
 conn.connect()
 
