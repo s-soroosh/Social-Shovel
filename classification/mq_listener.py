@@ -1,24 +1,35 @@
 __author__ = 'soroosh'
 
 import time
-import sys
-
+import server
+import config
+import json
 import stomp
 
+
 class MyListener(object):
+    def __init__(self, con):
+        self.con = con
+
     def on_error(self, headers, message):
+        json.load(message)
         print('received an error %s' % message)
+
     def on_message(self, headers, message):
-        print('received a message %s' % message)
+        print('% received' % message)
+        message_dict = json.loads(message)
+        serialized_obj = json.dumps(message_dict)
+
+        self.con.send(body=serialized_obj, destination=config.out_queue)
+
 
 conn = stomp.Connection()
-conn.set_listener('', MyListener())
+conn.set_listener('', MyListener(conn))
 conn.start()
 conn.connect()
 
-conn.subscribe(destination='/topic/message', id=1, ack='auto')
+conn.subscribe(destination=config.in_queue, id=1, ack='auto')
 
 # conn.send(body=' '.join(sys.argv[1:]), destination='/topic/analyzed-message')
-
-time.sleep(2000)
+server.Server().start()
 conn.disconnect()
