@@ -18,6 +18,12 @@ class MyListener(object):
     def on_message(self, headers, message):
         print('% received' % message)
         message_dict = json.loads(message)
+        # SATISFIED,
+        # NEUTRIAL,
+        # UNSATISFIED
+        message_dict['userOpinion'] = 'SATISFIED'
+        #Write some constants
+        message_dict['messageClass'] = 'SHOE'
         serialized_obj = json.dumps(message_dict)
 
         self.con.send(body=serialized_obj, destination=config.out_queue)
