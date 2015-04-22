@@ -4,7 +4,7 @@ package de.zalando.social.shovel.service.criteria;
  * Created by vvenkatraman on 21/04/15.
  */
 public enum AggregateCriteria {
-    LOCATION("location"),
+    COUNTRY("country"),
     OPINION("opinion"),
     CLASS("messageClass"),
     PROVIDER("provider");

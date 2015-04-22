@@ -3,7 +3,6 @@ package de.zalando.social.shovel.service;
 import com.mongodb.DBObject;
 import de.zalando.social.shovel.service.configuration.ServiceConfiguration;
 import de.zalando.social.shovel.service.criteria.AggregateCriteria;
-import de.zalando.social.shovel.service.criteria.CriteriaStats;
 import de.zalando.social.shovel.service.messaging.Message;
 import de.zalando.social.shovel.service.messaging.MessageRepository;
 import de.zalando.social.shovel.service.social.JMSMessagePublisher;
@@ -18,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vvenkatraman on 4/21/15.
@@ -61,9 +61,11 @@ public class MongoInsertTest {
             }
         }
 
-        DBObject results = repository.aggrMsg(AggregateCriteria.PROVIDER);
-        for(String key : results.keySet()) {
-            System.out.println(key + "" + results.get(key));
+        Map<String, Double> results = repository.aggrCount(AggregateCriteria.PROVIDER);
+        System.out.println(results);
+        String[] chkProviders = new String[] {"facebook", "twitter", "provider"};
+        for(String key : chkProviders) {
+            Assert.assertEquals(true, results.containsKey(key));
         }
     }
 }
