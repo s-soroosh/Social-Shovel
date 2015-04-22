@@ -110,13 +110,23 @@ class classifier(object):
         self.max_dimensions = max(self.token_mapping.values()) + 1
 
     def train(self, data, class_labels):
-        self.clf = svm.SVC(kernel='linear')
+        self.clf = svm.SVC(kernel='linear', probability=True)
         self.clf.fit(data, class_labels)
 #        self.regr = linear_model.LinearRegression()
 #        self.regr.fit(trd.data, trd.class_labels)
 
     def classify(self, unknown_text_vector):
-        return self.clf.predict(unknown_text_vector)
+        # without probabilities
+        #return self.clf.predict(unknown_text_vector)
+        # with probabilities
+        classes = self.clf.predict_proba(unknown_text_vector)
+        max_class = (-1, 0)
+        min_prob = (1.0 / float(len(list(classes[0])))) * 1.2
+        for i, prob in enumerate(list(classes[0])):
+            if prob > min_prob and prob > max_class[1]:
+                max_class = (i, prob)
+        return max_class[0]
+
 #        return self.regr.predict(unknown_text_vector)
 
 # Trains a classifier to determine the sentiment of a text.
@@ -164,7 +174,7 @@ def explain_result(tvec, assigned_class, data_preparation, classifier):
 
 # ============= training part ============
 dp_sentiment, cls_sentiment = train_sentiment(evaluate=True)
-#dp_category, cls_category = train_categorization()
+#dp_category, cls_category = train_categorization(i)
 
 # ============== classification part ======
 print "Example"
@@ -172,6 +182,6 @@ text3 = "i love zalando"
 print text3
 tvec = dp_sentiment.process_unclassified_data(text3)
 label = cls_sentiment.classify(tvec)
-print "Assigned class", label[0]
+print "Assigned class", label
 explain_result(tvec, label, dp_sentiment, cls_sentiment)
 print "\n\n"

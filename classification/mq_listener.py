@@ -10,7 +10,7 @@ import classifier
 class ClassificationListener(object):
     def __init__(self, con):
         self.con = con
-        self.opinions = { 0 : "UNSATISFIED", 1 : "SATISFIED", 2 : "NEUTRAL" }
+        self.opinions = { 0 : "UNSATISFIED", 1 : "SATISFIED", -1 : "NEUTRAL" }
 
     def on_error(self, headers, message):
         json.load(message)
@@ -24,7 +24,7 @@ class ClassificationListener(object):
         # opinion classification
         tvec = classifier.dp_sentiment.process_unclassified_data(text)
         label = classifier.cls_sentiment.classify(tvec)
-        label_name = self.opinions[label[0]]
+        label_name = self.opinions[label]
 
         # category classification
         
