@@ -11,4 +11,5 @@ import java.util.Map;
  */
 public interface MessageRepositoryCustom {
     public Map<String, Double> aggrCount(AggregateCriteria criteria);
+    public Map<String, Double> aggrCountByMultipleCriterias(AggregateCriteria... criterias);
 }

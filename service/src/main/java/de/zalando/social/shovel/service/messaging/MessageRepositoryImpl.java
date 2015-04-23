@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,9 +25,19 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
         return compute(criteria.getValue());
     }
 
-    private Map<String, Double> compute(String criteria) {
+    @Override
+    public Map<String, Double> aggrCountByMultipleCriterias(AggregateCriteria... criterias) {
+        String[] strCriterias = new String[criterias.length];
+        int i=0;
+        for(AggregateCriteria criteria : criterias) {
+            strCriterias[i++] = criteria.getValue();
+        }
+        return compute(strCriterias);
+    }
+
+    private Map<String, Double> compute(String... criterias) {
         GroupByResults<HashMap> groupedResults = mongoTemplate.group("message",
-                GroupBy.key(criteria).initialDocument("{ count: 0 }").reduceFunction("function(doc, prev) { prev.count += 1 }"),
+                GroupBy.key(criterias).initialDocument("{ count: 0 }").reduceFunction("function(doc, prev) { prev.count += 1 }"),
                 HashMap.class);
 
 
@@ -35,8 +46,11 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
         Iterator<HashMap> it = groupedResults.iterator();
         while(it.hasNext()) {
             HashMap<String, Object> map = it.next();
-            System.out.println(map);
-            results.put(map.get(criteria).toString(), (Double)map.get("count"));
+            StringBuffer criteriaBuff = new StringBuffer();
+            for(String criteria : criterias) {
+                criteriaBuff.append(map.get(criteria).toString()).append("_");
+            }
+            results.put(criteriaBuff.substring(0, criteriaBuff.length()-1), (Double)map.get("count"));
         }
 
         return results;
