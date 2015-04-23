@@ -8,7 +8,7 @@
  * Controller of the zssApp
  */
 angular.module('zssApp')
-  .controller('MainCtrl', function ($scope,$websocket,DataService) {
+  .controller('MainCtrl', function ($scope,$websocket,DataService,$http) {
         var dataStream = $websocket('ws://10.161.128.35:9090/socket/simple');
             $scope.data = DataService.data;
             $scope.countryData = DataService.countryData;
@@ -34,6 +34,30 @@ angular.module('zssApp')
                         $scope.data[2]+=1;
                     }
                 }
+            });
+        } else {
+            $http.get("http://10.161.128.35:9090/messages/1000").success(function (data) {
+                DataService.socialMediaMessages = data;
+                $scope.socialMediaMessages=data;
+                $scope.socialMediaMessages.forEach(function(message) {
+                    if(message.topics.length && message.topics.join().match(/zalando/ig)) {
+                        console.dir(message);
+                        if(message.userOpinion.toLowerCase()=="positive") {
+                            $scope.data[0]+=1;
+                            if(message.country=="DEU") {
+                                $scope.countryData[0]+=message.count;
+                            } else if(message.country=="NLD") {
+                                $scope.countryData[1]+=message.count;
+                            } else {
+                                $scope.countryData[2]+=message.count;
+                            }
+                        } else if(message.userOpinion.toLowerCase()=="neutral") {
+                            $scope.data[1]+=1;
+                        } else if(message.userOpinion.toLowerCase()=="negative") {
+                            $scope.data[2]+=1;
+                        }
+                    }
+                });
             });
         }
         $scope.processMessage = function(message) {
