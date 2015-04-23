@@ -124,7 +124,7 @@ class classifier(object):
         # with probabilities
         classes = self.clf.predict_proba(unknown_text_vector)
         max_class = (-1, 0)
-        min_prob = (1.0 / float(len(list(classes[0])))) * 1.2
+        min_prob = 0.6
         for i, prob in enumerate(list(classes[0])):
             if prob > min_prob and prob > max_class[1]:
                 max_class = (i, prob)
@@ -172,13 +172,13 @@ def explain_result(tvec, assigned_class, data_preparation, classifier):
     print "Document Tokens"
     for i, t in enumerate(tvec):
         if t > 0:
-            print "\t", dp_sentiment.reverse_token_mapping[i], t
+            print "\t", data_preparation.reverse_token_mapping[i], t
 
     for model_index in [0]:
         dims = {}
-        for i,t in enumerate(cls_sentiment.clf.coef_[model_index]):
+        for i,t in enumerate(classifier.clf.coef_[model_index]):
             if t != 0:
-                dims[dp_sentiment.reverse_token_mapping[i]] = t
+                dims[data_preparation.reverse_token_mapping[i]] = t
         dims = sorted(dims.items(), key=lambda x: x[1])
         print "Class Model %d - 5 strongest modelfeatures pos/neg" % model_index
         print dims[-5:]
@@ -199,7 +199,7 @@ explain_result(tvec, label, dp_sentiment, cls_sentiment)
 print "\n\n"
 
 print "Example 2"
-text = "Look at my awesome wedding dress"
+text = "Look at my awesome wedding dress" 
 print text
 tvec = dp_category.process_unclassified_data(text)
 label = cls_category.classify(tvec)
