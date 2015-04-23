@@ -7,6 +7,7 @@ import fetch_traindata
 import re
 import math
 from nltk import stem
+import sys
 
 class data_preparation(object):
     def __init__(self, options):
@@ -153,7 +154,7 @@ def train_sentiment(evaluate=False):
 
 # Trains a classifier to determine the topic/category of a text.
 # e.g. if it's about shoes or trousers....
-def train_categorization(evaluate=False):
+def train_categorization(evaluate=False, fold=5):
     dp = data_preparation(options={"smileys":False})
     train_data, train_labels = fetch_traindata.get_data("train_fashion_data.txt")
     text_vectors, class_labels = dp.process_train_data(train_data, train_labels)
@@ -162,58 +163,57 @@ def train_categorization(evaluate=False):
     cls.train(text_vectors, class_labels)
 
     if evaluate:
-        evaluate_classifier(cls, text_vectors, class_labels)
+        evaluate_classifier(cls, text_vectors, class_labels, fold=fold)
 
     return dp, cls
 
 def evaluate_classifier(classifier, text_vectors, class_labels, fold=5):
     scores = cross_validation.cross_val_score(classifier.clf, np.matrix(text_vectors), np.array(class_labels), cv=fold, scoring='f1')
-    print scores
+    print "F1 scores %d-crossvalidation: %r" % (fold, scores)
 
 def explain_result(tvec, assigned_class, data_preparation, classifier):
-    print "Further explanation"
     print
-    print "Document Tokens"
+    print "\tDocument Tokens"
     doc_tokens = set()
     for i, t in enumerate(tvec):
         if t > 0:
-            print "\t", data_preparation.reverse_token_mapping[i], t
+            print "\t\t", data_preparation.reverse_token_mapping[i], t
             doc_tokens.add(i)
 
     coef = classifier.clf.coef_
+    just_first = True
     for model_index in coef:
         dims = {}
         for i,t in enumerate(model_index):
-            if t != 0 and i in doc_tokens:
+            if t != 0:# and i in doc_tokens:
                 dims[data_preparation.reverse_token_mapping[i]] = float(t)
         dims = sorted(dims.items(), key=lambda x: x[1])
-#        print "Class Model %d - 5 strongest modelfeatures pos/neg" % model_index
-        print dims[-5:]
-        print dims[0:5]
+        print "\t", dims[-5:]
+        print "\t", dims[0:5]
+        if just_first:
+            break
 
 # ============= training part ============
+print "Training sentiment..."
 dp_sentiment, cls_sentiment = train_sentiment(evaluate=True)
-dp_category, cls_category = train_categorization(evaluate=False)
+print "Training category..."
+dp_category, cls_category = train_categorization(evaluate=False, fold=5)
+print ""
 
-# ============== classification part ======
-print "Example"
-text = "i love zalando"
-print text
-tvec = dp_sentiment.process_unclassified_data(text)
-label = cls_sentiment.classify(tvec)
-print "Assigned class", label
-#explain_result(tvec, label, dp_sentiment, cls_sentiment)
-print "\n\n"
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1]:
+    text = sys.argv[1]
+    tvec = dp_sentiment.process_unclassified_data(text)
+    label = cls_sentiment.classify(tvec)
+    explain_result(tvec, label, dp_sentiment, cls_sentiment)
+    print text, ":"
+    print "Assigned sentiment class", label
+    tvec = dp_category.process_unclassified_data(text)
+    label = cls_category.classify(tvec)
+    explain_result(tvec, label, dp_category, cls_category)
+    print "Assigned category class", label
+    print
+    print "sentiment: 0 = negative, 1 = positive, -1 = neutral"
+    print 'category: 0: "UNDERWEAR", 1: "ACCESSORIES", 2: "DRESS", 3: "JACKET", 4: "SHIRT", 5: "SHOE", 6: "SKIRT", 7: "SUIT", 8: "TROUSER", -1: "NEUTRAL"'
+    print
 
-print "Example 2"
-#text = "Look at my awesome wedding dress"
-text = "Today's Penguin deals! http://t.co/lqWElp2g2T #penguin #fashion"
-text = "Are your dealines looming? Let us know what you are working on today, maybe we can help! #bloggers #journos #health #beauty #fashion #ideas "
-text = "RT @melissacampbe12: Throw back to my last shoot working with the beautiful @georgeemsley #fashion #styling https://t.co/jfAS4yz1wh"
-text = "#Jewelry #Fashion 925 Silver 2.5ct Created Blue \u0026 White Sapphire Oval Clutchless Earrings http://t.co/fPWHlw6wcY #Accessories #Deals"
-print text
-tvec = dp_category.process_unclassified_data(text)
-label = cls_category.classify(tvec)
-explain_result(tvec, label, dp_category, cls_category)
-print "Assigned class", label
-print "\n\n"
+    
