@@ -8,18 +8,14 @@
  * Controller of the zssApp
  */
 angular.module('zssApp')
-  .controller('MapsCtrl', function ($scope) {
-
+  .controller('MapsCtrl', function ($scope,DataService) {
+        $scope.mapRate=DataService.mapRate;
 
       function drawRegionsMap() {
       console.log("drawed");
-        var data = google.visualization.arrayToDataTable([
-          ['Country', 'Popularity'],
-          ['Germany', 200],
-          ['France', 600]
-        ]);
+        var data = google.visualization.arrayToDataTable($scope.mapRate);
 
-        var options = {region: '150'};
+        var options = {region: 'world'};
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 

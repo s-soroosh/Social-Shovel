@@ -9,7 +9,25 @@
  */
 angular.module('zssApp')
   .service('DataService', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
       this.data=[0,0,0];
       this.countryData=[0,0,0];
+        this.socialMediaMessages=[];
+        this.mapRate=[
+            ['Country', 'Popularity'],
+            ['Germany', 100],
+            ['Poland', 79],
+            ['Netherlands', 77],
+            ['Great Britain', 33],
+            ['Italy', 66],
+            ['France', 80]
+        ];
+        this.trendsData = [{name:"Shoes",provider:"twitter",posts:332,languages:["DE","ENG"],period:"May-June"},
+            {name:"Sneakers",provider:"twitter",posts:550,languages:["FR","ENG"],period:"May-June"},
+            {name:"Jeans",provider:"twitter",posts:113,languages:["DE","ENG"],period:"May-June"},
+            {name:"Boots",provider:"twitter",posts:120,languages:["DE","ENG"],period:"May-June"},
+            {name:"Hats",provider:"twitter",posts:120,languages:["DE","ENG"],period:"May-June"},
+            {name:"Bra",provider:"twitter",posts:120,languages:["DE","ENG"],period:"May-June"},
+            {name:"Black boots",provider:"twitter",posts:31,languages:["IT"],period:"May-June"},
+            {name:"Ponchoes",provider:"twitter",posts:45,languages:["DE","ENG"],period:"May-June"}
+        ];
   });

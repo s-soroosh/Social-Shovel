@@ -12,36 +12,43 @@ angular.module('zssApp')
         var dataStream = $websocket('ws://localhost:9090/socket/simple');
             $scope.data = DataService.data;
             $scope.countryData = DataService.countryData;
+            $scope.socialMediaMessages = DataService.socialMediaMessages;
             $scope.collection = [];
 
 
         $scope.processMessage = function(message) {
-            if(message.category=="positive") {
-                $scope.data[0]+=message.count;
-            } else if(message.category=="neutrall") {
-                $scope.data[1]+=message.count;
+            if(message.type=="statistic") {
+                if(message.category=="positive") {
+                    $scope.data[0]+=message.count;
+                    if(message.country=="DEU") {
+                        $scope.countryData[0]+=message.count;
+                    } else if(message.country=="NLD") {
+                        $scope.countryData[1]+=message.count;
+                    } else {
+                        $scope.countryData[2]+=message.count;
+                    }
+                } else if(message.category=="neutral") {
+                    $scope.data[1]+=message.count;
+                } else if(message.category=="negative") {
+                    $scope.data[2]+=message.count;
+                }
             } else {
-                $scope.data[2]+=message.count;
+                $scope.socialMediaMessages.unshift(message);
             }
-            if(message.category=="positive") {
+            console.dir(message);
 
-                 if(message.country=="DEU") {
-                 $scope.countryData[0]+=message.count;
-                 } else if(message.country=="NLD") {
-                 $scope.countryData[1]+=message.count;
-                 } else {
-                 $scope.countryData[2]+=message.count;
-                 }
-
-            }
-            console.log(message);
             $scope.collection.push(message);
         };
-
+        $scope.checkClass = function(opinion) {
+            if(opinion=='positive') {
+                return 'fa-thumbs-o-up';
+            } else if(opinion=='negative') {
+                return 'fa-thumbs-o-down';
+            }
+        };
         dataStream.onMessage(function(message) {
             $scope.processMessage(JSON.parse(message.data));
         });
-
 
         $scope.labels = ["Positive", "Neutral", "Negative"];
         $scope.countryLabels = ["Deutschland", "Netherlands", "France"];

@@ -3,62 +3,24 @@
 </div>
 <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Latest tweets</div>
+        <div class="panel-heading">Latest messages</div>
 
 
         <table class="table table-striped">
                 <thead>
                 <tr>
-                        <th>Username</th>
-                        <th>Source</th>
+                        <th>Name</th>
                         <th>Message</th>
+                        <th>Provider</th>
+                        <th>Language</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                </tr>
-                <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                </tr>
-                <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                </tr>
-                <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                </tr>
-                <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                </tr>
-                <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                </tr>
-                <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                </tr>
-                <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                </tr>
-                <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
+                <tr ng-repeat="message in socialMediaMessages | limitTo: 5">
+                        <td><img  ng-if="message.imageUrl" ng-src="message.imageUrl"> {{message.userInfo.name}}</td>
+                        <td>{{message.content}}</td>
+                        <td class="provider"><i class="fa fa-{{message.provider | lowercase}}"></i></td>
+                        <td>{{message.language}}</td>
                 </tr>
                 </tbody>
         </table>

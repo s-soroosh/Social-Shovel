@@ -21,7 +21,7 @@ angular
     'ngTouch',
       'chart.js'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -35,7 +35,23 @@ angular
         templateUrl: 'views/maps.html',
         controller: 'MapsCtrl'
       })
+      .when('/statistics', {
+        templateUrl: 'views/statistics.html',
+        controller: 'StatisticsCtrl'
+      })
+      .when('/messages', {
+        templateUrl: 'views/messages.html',
+        controller: 'MessagesCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
-  });
+      $locationProvider.html5Mode=true;
+  }).run(function($rootScope) {
+      $rootScope.page="Dashboard";
+
+      $rootScope.$on('$routeChangeSuccess', function(next, current) {
+        $rootScope.page=current.$$route.originalPath;
+      });
+
+    });

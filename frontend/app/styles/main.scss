@@ -155,9 +155,9 @@ h1, h2, h3, h4, h5, h6, div, strong, p, i, b, em, a, address, input, select, tex
   color: #333;
 }
 
-.sidebar-nav li a:hover {
+.sidebar-nav li a:hover,  a.active {
   text-decoration: none;
-  color: #000;
+  color: #fff !important;
   background: #bebebe;
 }
 
@@ -213,4 +213,19 @@ h1, h2, h3, h4, h5, h6, div, strong, p, i, b, em, a, address, input, select, tex
 }
 .remove-spaces {
   margin-top: 0px;
+}
+.provider {
+  font-size: 24px;
+}
+.relFix{
+  position: relative;
+  padding-top: 100px;
+}
+.page-header  {
+  z-index: 2000;
+  width: 100%;
+  background: #fff;
+  height: 80px;
+  position: fixed;
+  top: 0px;
 }

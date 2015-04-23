@@ -8524,8 +8524,9 @@ body {
   margin-bottom: 10px;
   /* Make the masthead heading the same height as the navigation */
 }
-/* line 32, ../../app/styles/main.scss */
-.header h1, .header h2, .header h3, .header h4, .header h5, .header h6, .header div, .header strong, .header p, .header i, .header b, .header em, .header a, .header address, .header input, .header select, .header textarea, .header label, .header button {
+
+/* line 34, ../../app/styles/main.scss */
+h1, h2, h3, h4, h5, h6, div, strong, p, i, b, em, a, address, input, select, textarea, label, button {
   color: #404040;
   font-family: arial,helvetica,"DejaVu Sans","Arial Unicode MS","Lucida Sans Unicode",sans-serif;
   font-style: normal;
@@ -8662,9 +8663,9 @@ body {
 }
 
 /* line 158, ../../app/styles/main.scss */
-.sidebar-nav li a:hover {
+.sidebar-nav li a:hover, a.active {
   text-decoration: none;
-  color: #000;
+  color: #fff !important;
   background: #bebebe;
 }
 
@@ -8733,4 +8734,25 @@ body {
 /* line 214, ../../app/styles/main.scss */
 .remove-spaces {
   margin-top: 0px;
+}
+
+/* line 217, ../../app/styles/main.scss */
+.provider {
+  font-size: 24px;
+}
+
+/* line 220, ../../app/styles/main.scss */
+.relFix {
+  position: relative;
+  padding-top: 100px;
+}
+
+/* line 224, ../../app/styles/main.scss */
+.page-header {
+  z-index: 2000;
+  width: 100%;
+  background: #fff;
+  height: 80px;
+  position: fixed;
+  top: 0px;
 }
