@@ -8756,3 +8756,9 @@ h1, h2, h3, h4, h5, h6, div, strong, p, i, b, em, a, address, input, select, tex
   position: fixed;
   top: 0px;
 }
+
+/* line 232, ../../app/styles/main.scss */
+.messageField {
+  width: 30%;
+  overflow: hidden;
+}
