@@ -36,7 +36,13 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
         while(it.hasNext()) {
             HashMap<String, Object> map = it.next();
             System.out.println(map);
-            results.put(map.get(criteria).toString(), (Double)map.get("count"));
+
+            Object key = map.get(criteria);
+            String keyValue ="";
+            if (key != null){
+                keyValue = key.toString();
+            }
+            results.put(keyValue, (Double)map.get("count"));
         }
 
         return results;
