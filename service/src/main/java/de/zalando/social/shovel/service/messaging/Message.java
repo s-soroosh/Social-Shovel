@@ -12,9 +12,14 @@ import java.util.UUID;
  * Created by SOROOSH on 4/19/15.
  */
 public class Message implements Serializable {
+
+    public String getCountry() {
+        return country;
+    }
+
     public enum UserOpinion {
         SATISFIED,
-        NEUTRIAL,
+        NEUTRAL,
         UNSATISFIED
 
     }
@@ -25,7 +30,8 @@ public class Message implements Serializable {
         public MessageBuilder(String content, String provider, String... topics) {
             ArrayList<String> selectedTopics = new ArrayList<>();
             for (String t : topics) {
-                if (content.contains(t)) {
+                String normalized = content.toLowerCase();
+                if (normalized.contains(t.toLowerCase())) {
                     selectedTopics.add(t);
                 }
             }
@@ -49,6 +55,11 @@ public class Message implements Serializable {
             return this;
         }
 
+        public MessageBuilder at(String country){
+            this.msg.country = country;
+            return this;
+        }
+
         public Message build() {
             return this.msg;
         }
@@ -60,6 +71,7 @@ public class Message implements Serializable {
     private final String[] topics;
     private final String provider;
     private final String content;
+    private String country;
     private String language;
     private UserInfo userInfo;
     private Message.UserOpinion userOpinion;
@@ -79,8 +91,8 @@ public class Message implements Serializable {
         this.topics = topics;
         this.content = content;
         this.provider = provider;
-        this.userOpinion = UserOpinion.NEUTRIAL;
-        this.messageClass = "";
+        this.userOpinion = null;
+        this.messageClass = null;
         this.id= UUID.randomUUID().toString();
     }
 
@@ -91,13 +103,13 @@ public class Message implements Serializable {
         this.userInfo = userInfo;
         this.provider = provider;
         this.postedDate = postedDate;
-        this.userOpinion = UserOpinion.NEUTRIAL;
-        this.messageClass = "";
+        this.userOpinion = null;
+        this.messageClass = null;
         this.id= UUID.randomUUID().toString();
     }
 
     public void changeUserOpinion(Message.UserOpinion opinion) {
-        if (this.userOpinion != UserOpinion.NEUTRIAL) {
+        if (this.userOpinion != UserOpinion.NEUTRAL) {
             throw new IllegalStateException("It is not possible to change the opinion more than 1 time!");
         }
         this.userOpinion = opinion;

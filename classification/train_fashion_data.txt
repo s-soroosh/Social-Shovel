@@ -1,0 +1,467 @@
+A-line skirt   %%% 6
+A-shirt     %%% 0
+Adidas Kampung   %%% 5
+Amauti   %%% 3
+Arctic jacket   %%% 3
+Athletic supporter     %%% 0
+Athletic-style boxer briefs     %%% 0
+Atilla   %%% 3
+Babydoll     %%% 0
+Bag   %%% 1
+Balconette bra     %%% 0
+Ball gown   %%% 2
+Ball jacket   %%% 3
+Ballerina skirt   %%% 6
+Ballet shoe   %%% 5
+Bandana   %%% 1
+Baseball shirt   %%% 4
+Basque     %%% 0
+Bast shoe   %%% 5
+Bedjacket     %%% 0
+Bell-bottoms    %%% 8
+Bell-shaped skirt   %%% 6
+Belt   %%% 1
+Bermuda shorts    %%% 8
+Bikini     %%% 0
+Bikini underwear     %%% 0
+Black tie    %%% 7
+Blazer   %%% 3
+Bloomers     %%% 0
+Blouse   %%% 4
+Blouson   %%% 3
+Blucher shoe   %%% 5
+Boat shoe   %%% 5
+Bodice     %%% 0
+Bodyscapes   %%% 3
+Bodystocking     %%% 0
+Bodysuit     %%% 0
+Bolero   %%% 3
+Bomber jacket   %%% 3
+Bondage pants    %%% 8
+boob tube   %%% 4
+Booty shorts     %%% 0
+Boucle Jacket   %%% 3
+Bouffant gown   %%% 2
+Bow tie   %%% 1
+Boxer briefs     %%% 0
+Boxer shorts     %%% 0
+Boxers     %%% 0
+boy short panties     %%% 0
+Boy shorts     %%% 0
+boyleg briefs     %%% 0
+boys' cut shorts     %%% 0
+Boyshorts     %%% 0
+Bra     %%% 0
+Brassiere     %%% 0
+Briefs     %%% 0
+Brogan   %%% 5
+Brogue shoe   %%% 5
+Broomstick skirt   %%% 6
+Brothel creeper   %%% 5
+Brunswick   %%% 3
+Bubble dress   %%% 6
+Bubble skirt   %%% 6
+Buffalo Boots   %%% 5
+Bustier     %%% 0
+Calceology   %%% 5
+cami   %%% 4
+Camiknickers     %%% 0
+Camisole     %%% 0
+camp shirt   %%% 4
+Cantabrian albarcas   %%% 5
+Capri pants    %%% 8
+Car coat   %%% 3
+Caraco   %%% 3
+Cardigan   %%% 4
+Cargo pants    %%% 8
+Cargo skirt   %%% 6
+Chaps    %%% 8
+Cheeky     %%% 0
+Chef's jacket   %%% 3
+Chemise     %%% 0
+Chopine   %%% 5
+Circle skirt   %%% 6
+Cleanroom suit     %%% 7
+Climbing shoe   %%% 5
+Clog   %%% 5
+coat   %%% 3
+Cocktail dress   %%% 2
+Coin purse   %%% 1
+combo skirt   %%% 6
+Control panties     %%% 0
+Converse All Star   %%% 5
+Corsage     %%% 0
+Corselet     %%% 0
+Corset     %%% 0
+Court dress     %%% 7
+Court shoe   %%% 5
+Court uniform     %%% 7
+Crocs    %%% 5
+Cross country running shoe   %%% 5
+Cufflink   %%% 1
+cullotte   %%% 6
+Cummerbund   %%% 1
+Cycling shorts    %%% 8
+D'Orsay shoes   %%% 5
+Débutante dress   %%% 2
+Demi bra     %%% 0
+denim jacket   %%% 3
+Derby shoe   %%% 5
+Diagonal-flap briefs     %%% 0
+diaper shirt   %%% 4
+Dinner jacket   %%% 3
+dinner shirt   %%% 4
+Dirndl skirt   %%% 6
+Donkey jacket   %%% 3
+Dori shoes   %%% 5
+double-back briefs     %%% 0
+Double-seat briefs      %%% 0
+Doublet   %%% 3
+Down jacket   %%% 3
+Drawers     %%% 0
+dress   %%% 2
+Dress pants    %%% 8
+dress shirt   %%% 4
+Dress shoe   %%% 5
+Driving moccasins   %%% 5
+Duffle coat   %%% 3
+Duster coat   %%% 3
+Earth shoe   %%% 5
+Eastpak   %%% 1
+Eisenhower jacket   %%% 3
+Elevator shoes   %%% 5
+Espadrille   %%% 5
+eton jacket   %%% 3
+evening dress   %%% 2
+Evening gown   %%% 2
+Fashion boot   %%% 5
+Field jacket   %%% 3
+Flak jacket   %%% 3
+Flannel jacket   %%% 3
+Fleece jacket   %%% 3
+Flight jacket   %%% 3
+French cut panties     %%% 0
+French maid     %%% 0
+Full skirt   %%% 6
+G string     %%% 0
+G-string     %%% 0
+Gaiters   %%% 1
+Galesh   %%% 5
+Garter     %%% 0
+Garter belt     %%% 0
+Gee-string     %%% 0
+Gilet   %%% 3
+Girdle     %%% 0
+Giveh   %%% 5
+Glasses   %%% 1
+Gloves   %%% 1
+golf shirt   %%% 4
+Granny panties     %%% 0
+guayabera   %%% 4
+guinea tee     %%% 0
+Gymslip     %%% 7
+Gymslip   %%% 2
+Halfshirt   %%% 4
+Halter top   %%% 4
+Handbag   %%% 1
+Handkerchief   %%% 1
+Harrington jacket   %%% 3
+Headband   %%% 1
+Heavy shirt   %%% 4
+Henley shirt   %%% 4
+High cut panties     %%% 0
+High water pants    %%% 8
+High-heel   %%% 5
+High-sided bikini underwear     %%% 0
+Hipster     %%% 0
+Hobble skirt   %%% 6
+Hoodie   %%% 4
+Hosiery     %%% 0
+House dress   %%% 2
+Huarache   %%% 5
+Hunkemöller     %%% 0
+jacket   %%% 3
+Jazz shoe   %%% 5
+Jean jacket   %%% 3
+Jean skirt   %%% 6
+Jeans    %%% 8
+Jelly shoes   %%% 5
+Jerkin   %%% 3
+Jersey   %%% 4
+Jersey nightshirt     %%% 0
+Jewellery   %%% 1
+job skirt   %%% 6
+jock     %%% 0
+Jockey shorts     %%% 0
+Jockstrap     %%% 0
+Jumper   %%% 4
+Jumper dress   %%% 2
+Jumpsoles   %%% 5
+Jumpsuit     %%% 7
+Jutti   %%% 5
+Kasaya     %%% 7
+Kerchief   %%% 1
+Kilt jacket   %%% 3
+Kilt-skirt   %%% 6
+Kimono     %%% 0
+Kit   %%% 4
+Kitten heel   %%% 5
+Kleets   %%% 5
+Knickers     %%% 0
+Knit boxers     %%% 0
+Kung fu shoe   %%% 5
+Lab coat     %%% 7
+Lab coat   %%% 3
+Leather jacket   %%% 3
+Leather skirt   %%% 6
+letter jacket   %%% 3
+letterman jacket   %%% 3
+Levis's    %%% 8
+Levis's 501    %%% 8
+Life jacket   %%% 3
+Little black dress   %%% 2
+Loafers   %%% 5
+long handles     %%% 0
+Long johns     %%% 0
+Long underwear     %%% 0
+Long-sleeved T-shirt   %%% 4
+Lotus shoes   %%% 5
+Low-cut briefs     %%% 0
+low-rise briefs     %%% 0
+Low-sided bikini underwear     %%% 0
+Lowrise pants    %%% 8
+Mackintosh   %%% 3
+Manteau   %%% 3
+Mary Jane   %%% 5
+Maxi dress   %%% 2
+Maxiskirt   %%% 6
+merry widow     %%% 0
+Mess jacket   %%% 3
+Microskirt   %%% 6
+Midi dress   %%% 2
+Midi skirt   %%% 6
+Minidress   %%% 2
+Miniskirt   %%% 6
+Moccasin   %%% 5
+Monk shoe   %%% 5
+Morning coat   %%% 3
+Motorcycle jacket   %%% 3
+Mule   %%% 5
+muscle shirt     %%% 0
+Necktie   %%% 1
+Negligee     %%% 0
+Nehru jacket   %%% 3
+Nightdress   %%% 2
+Nightgown     %%% 0
+nightie     %%% 0
+Nightshirt     %%% 0
+Nike Air   %%% 5
+Nike Bruin   %%% 5
+Nike Cortez   %%% 5
+Nike Mag   %%% 5
+Norfolk jacket   %%% 3
+Omega   %%% 1
+Onesie     %%% 7
+onesie   %%% 4
+Onitsuka Tiger   %%% 5
+Onitsuka Tiger Corsair   %%% 5
+Onitsuka Tiger Mexico   %%% 5
+Opanak   %%% 5
+Opinga   %%% 5
+Organ shoes   %%% 5
+Orthopaedic footwear   %%% 5
+Over-the-knee boot   %%% 5
+Overall    %%% 8
+Oxford shoe   %%% 5
+Padded bra     %%% 0
+Palazzo trousers    %%% 8
+Pampootie   %%% 5
+Panties     %%% 0
+Pantsuit     %%% 7
+Parachute pants    %%% 8
+Pea coat   %%% 3
+Pedal pushers    %%% 8
+Peignoir     %%% 0
+Pencil skirt   %%% 6
+Peplum jacket   %%% 3
+Peranakan beaded slippers   %%% 5
+Peshawari chappal   %%% 5
+Peter Thomson dress   %%% 2
+petticoat   %%% 6
+Petticoat     %%% 0
+Phat pants    %%% 8
+Pinafore   %%% 4
+Platform shoe   %%% 5
+Pleated skirt   %%% 6
+Pocketwatch   %%% 1
+poet shirt   %%% 4
+Pointe shoe   %%% 5
+Pointed shoe   %%% 5
+Pointinini   %%% 5
+Polo shirt    %%% 4
+Poodle skirt   %%% 6
+Pouch boxer briefs     %%% 0
+Pouch briefs     %%% 0
+Prairie skirt   %%% 6
+Princess dress   %%% 2
+Puffer jacket   %%% 3
+Pullover   %%% 4
+Puma State   %%% 5
+Puma Suede   %%% 5
+Push-up bra     %%% 0
+Rah-rah skirt   %%% 6
+Rain jacket   %%% 3
+Raincoat   %%% 3
+Rayban   %%% 1
+Red Sea rig     %%% 7
+reefer   %%% 3
+Reefing jacket   %%% 3
+reversible jacket   %%% 3
+Riding jacket   %%% 3
+Ringer T-shirt   %%% 4
+Rocker bottom shoe   %%% 5
+Rolex   %%% 1
+Romper suit     %%% 7
+Round-neck T-shirt     %%% 0
+roundabout   %%% 3
+Ruby slippers   %%% 5
+Rugby shirt   %%% 4
+Russian boot   %%% 5
+Saddle shoe   %%% 5
+Sailor dress   %%% 2
+Sailor jacket   %%% 3
+Sandal   %%% 5
+Sari   %%% 2
+Sarong   %%% 6
+Satin jacket   %%% 3
+Scarf   %%% 1
+Schießer     %%% 0
+Scooter skirt   %%% 6
+Scrubs     %%% 7
+Sheath dress   %%% 2
+shelf top   %%% 4
+Shift dress   %%% 2
+shirt   %%% 4
+Shirtdress   %%% 2
+Shirtwaist   %%% 4
+shoe   %%% 5
+Short skirt   %%% 6
+shorties     %%% 0
+Shorts    %%% 8
+Silver Shoes   %%% 5
+Singlet   %%% 4
+singlet     %%% 0
+singlet     %%% 0
+Skater skirt   %%% 6
+skirt   %%% 6
+skort   %%% 6
+Sleeveless shirt   %%% 4
+Sleeveless shirt     %%% 0
+Slim-fit pants    %%% 8
+Slip     %%% 0
+Slip dress   %%% 2
+Slip-on shoe   %%% 5
+Slipper   %%% 5
+Smoking jacket   %%% 3
+Sneakers   %%% 5
+Snow boot   %%% 5
+spaghetti straps   %%% 4
+Spankies     %%% 0
+Spanks     %%% 0
+Spanky-pants     %%% 0
+Spectator shoe   %%% 5
+Spencer   %%% 3
+Sport coat   %%% 3
+Sports bra     %%% 0
+Sports jacket   %%% 3
+Steel-toe boot   %%% 5
+Stockings     %%% 0
+Straight skirt   %%% 6
+Straitjacket   %%% 3
+strap     %%% 0
+Strapless bra     %%% 0
+Strapless dress   %%% 2
+Strapless pouch     %%% 0
+strappy top   %%% 4
+String bikini     %%% 0
+Stringbody     %%% 0
+Stroller     %%% 7
+Suit jacket   %%% 3
+Sundress   %%% 2
+Sunglasses   %%% 1
+supporter     %%% 0
+Suspender belt     %%% 0
+Suspenders   %%% 1
+Swatch   %%% 1
+Sweater %%% 4
+Sweater vest   %%% 4
+Sweaters   %%% 4
+Sweatpants    %%% 8
+Sweatshirt   %%% 4
+T-bar sandal   %%% 5
+T-Shirt   %%% 4
+T-shirt bra     %%% 0
+T-skirt   %%% 6
+Tanga     %%% 0
+Tank top   %%% 4
+Tank top     %%% 0
+Tap pants     %%% 0
+Tea gown   %%% 2
+Teddy     %%% 0
+tee   %%% 4
+Tee     %%% 0
+tennis shirt   %%% 4
+Thermal underwear     %%% 0
+Thong     %%% 0
+Tiered skirt   %%% 6
+Tiger-head shoes   %%% 5
+tighty-whiteys     %%% 0
+Top shirt   %%% 4
+Torsolette     %%% 0
+Tracksuit jacket   %%% 3
+Traditional briefs      %%% 0
+Trapeze dress   %%% 2
+trench coat   %%% 3
+Trouser skirt   %%% 6
+Trunks     %%% 0
+Trunks     %%% 0
+Tsarouhi   %%% 5
+Tube top   %%% 4
+Tunic   %%% 4
+Turf Shoe   %%% 5
+Turnshoe   %%% 5
+Turtleneck   %%% 4
+Tuxedo     %%% 7
+Ugg Boots   %%% 5
+Undergarment     %%% 0
+underskirt     %%% 0
+Unitard     %%% 0
+V-neck T-shirt     %%% 0
+Vacuum jacket   %%% 3
+Vans   %%% 5
+Vans Era   %%% 5
+Varsity jacket   %%% 3
+Venetian-style shoe   %%% 5
+Vest   %%% 4
+Victoria's Secret     %%% 0
+Waistcoat   %%% 4
+Wallet   %%% 1
+Wamus   %%% 3
+Watch   %%% 1
+wedding dress   %%% 2
+White tie     %%% 7
+Whole body     %%% 0
+wife beater     %%% 0
+Windbreaker    %%% 3
+windcheater   %%% 3
+Windpants    %%% 8
+Winklepicker   %%% 5
+Wonderbra     %%% 0
+Wörishofer   %%% 5
+Woven boxers     %%% 0
+Wrangler    %%% 8
+Wrap dress   %%% 2
+Wraparound skirt   %%% 6
+Wristwatch %%% 1
+Y-fronts     %%% 0
+Yoga pants    %%% 8

@@ -1,6 +1,7 @@
 from sklearn import svm
 from sklearn import linear_model
 from sklearn import cross_validation
+from sklearn import metrics
 import numpy as np
 import fetch_traindata
 import re
@@ -49,7 +50,7 @@ class data_preparation(object):
         vector_length = 0
         for dim, weight in text_dim.iteritems():
             tvec[dim] = weight * math.log(self.num_trainingdocs / float(self.token_occurence[dim]))
-            vector_length += weight * weight
+            vector_length += pow(tvec[dim],2)
         # transform document vectors to unit length
         vector_length = math.sqrt(vector_length)
         for dim, weight in text_dim.iteritems():
@@ -109,20 +110,30 @@ class classifier(object):
         self.max_dimensions = max(self.token_mapping.values()) + 1
 
     def train(self, data, class_labels):
-        self.clf = svm.SVC(kernel='linear')
+        self.clf = svm.SVC(kernel='linear', probability=True)
         self.clf.fit(data, class_labels)
 #        self.regr = linear_model.LinearRegression()
 #        self.regr.fit(trd.data, trd.class_labels)
 
     def classify(self, unknown_text_vector):
-        return self.clf.predict(unknown_text_vector)
+        # without probabilities
+        #return self.clf.predict(unknown_text_vector)
+        # with probabilities
+        classes = self.clf.predict_proba(unknown_text_vector)
+        max_class = (-1, 0)
+        min_prob = (1.0 / float(len(list(classes[0])))) * 1.2
+        for i, prob in enumerate(list(classes[0])):
+            if prob > min_prob and prob > max_class[1]:
+                max_class = (i, prob)
+        return max_class[0]
+
 #        return self.regr.predict(unknown_text_vector)
 
 # Trains a classifier to determine the sentiment of a text.
 # The classes are Positive (2), Negative (0) and Neutral(1)
 def train_sentiment(evaluate=False):
     dp = data_preparation(options={})
-    train_data, train_labels = fetch_traindata.get_data()
+    train_data, train_labels = fetch_traindata.get_data("train_data.txt")
     text_vectors, class_labels = dp.process_train_data(train_data, train_labels)
     
     cls = classifier()
@@ -135,12 +146,21 @@ def train_sentiment(evaluate=False):
 
 # Trains a classifier to determine the topic/category of a text.
 # e.g. if it's about shoes or trousers....
-def train_categorization():
-    #dp = data_preparation(options={"smileys":False})
-    pass
+def train_categorization(evaluate=False):
+    dp = data_preparation(options={"smileys":False})
+    train_data, train_labels = fetch_traindata.get_data("train_fashion_data.txt")
+    text_vectors, class_labels = dp.process_train_data(train_data, train_labels)
+    
+    cls = classifier()
+    cls.train(text_vectors, class_labels)
+
+    if evaluate:
+        evaluate_classifier(cls, text_vectors, class_labels)
+
+    return dp, cls
 
 def evaluate_classifier(classifier, text_vectors, class_labels, fold=5):
-    scores = cross_validation.cross_val_score(classifier.clf, np.matrix(text_vectors), np.array(class_labels), cv=fold)
+    scores = cross_validation.cross_val_score(classifier.clf, np.matrix(text_vectors), np.array(class_labels), cv=fold, scoring='f1')
     print scores
 
 def explain_result(tvec, assigned_class, data_preparation, classifier):
@@ -161,15 +181,24 @@ def explain_result(tvec, assigned_class, data_preparation, classifier):
         print dims[-5:]
         print dims[0:5]
 
-if __name__ == "__main__":
-    # ============= training part ============
-    dp_sentiment, cls_sentiment = train_sentiment(evaluate=True)
-    #dp_category, cls_category = train_categorization()
+# ============= training part ============
+dp_sentiment, cls_sentiment = train_sentiment(evaluate=True)
+dp_category, cls_category = train_categorization(evaluate=False)
 
-    # ============== classification part ======
-    text3 = "i hate zalando shit "#"I never liked #zalando"
-    tvec = dp_sentiment.process_unclassified_data(text3)
-    label = cls_sentiment.classify(tvec)
-    print "Assigned class", label[0]
-    explain_result(tvec, label, dp_sentiment, cls_sentiment)
+# ============== classification part ======
+print "Example"
+text = "i love zalando"
+print text
+tvec = dp_sentiment.process_unclassified_data(text)
+label = cls_sentiment.classify(tvec)
+print "Assigned class", label
+explain_result(tvec, label, dp_sentiment, cls_sentiment)
+print "\n\n"
 
+print "Example 2"
+text = "Look at my awesome wedding dress"
+print text
+tvec = dp_category.process_unclassified_data(text)
+label = cls_category.classify(tvec)
+print "Assigned class", label
+print "\n\n"

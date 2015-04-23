@@ -19,27 +19,27 @@ import java.util.Date;
 /**
  * Created by soroosh on 4/21/15.
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringApplicationConfiguration(classes = ServiceConfiguration.class)
-//public class SimpleTest {
-//
-//    @Autowired
-//    private MessagePublisher publisher;
-//
-//    @Autowired
-//    private MessageRepository repository;
-//
-//    @Before
-//    public void before(){
-////        repository.deleteAll();
-//    }
-//
-//    @Test
-//    public void when_a_new_message_added_to_queue_it_should_be_save_in_db(){
-//        Message.MessageBuilder messageBuilder = new Message.MessageBuilder("simple content", "twitter", "simple");
-//        Message msg = messageBuilder.on(new Date()).build();
-//        publisher.publish(msg);
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = ServiceConfiguration.class)
+public class SimpleTest {
+
+    @Autowired
+    private MessagePublisher publisher;
+
+    @Autowired
+    private MessageRepository repository;
+
+    @Before
+    public void before(){
+//        repository.deleteAll();
+    }
+
+    @Test
+    public void when_a_new_message_added_to_queue_it_should_be_save_in_db(){
+        Message.MessageBuilder messageBuilder = new Message.MessageBuilder("simple content", "twitter", "simple");
+        Message msg = messageBuilder.on(new Date()).build();
+        publisher.publish(msg);
 //        Assert.assertEquals(1, repository.findAll().size());
-//
-//    }
-//}
+
+    }
+}
