@@ -63,7 +63,7 @@ public class MongoInsertTest {
 
         Map<String, Double> results = repository.aggrCount(AggregateCriteria.PROVIDER);
         System.out.println(results);
-        String[] chkProviders = new String[] {"facebook", "twitter", "provider"};
+        String[] chkProviders = new String[] {"facebook", "twitter"};
         for(String key : chkProviders) {
             Assert.assertEquals(true, results.containsKey(key));
         }
