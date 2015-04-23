@@ -8524,58 +8524,59 @@ body {
   margin-bottom: 10px;
   /* Make the masthead heading the same height as the navigation */
 }
-/* line 31, ../../app/styles/main.scss */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+
+/* line 34, ../../app/styles/main.scss */
+h1, h2, h3, h4, h5, h6, div, strong, p, i, b, em, a, address, input, select, textarea, label, button {
+  color: #404040;
+  font-family: arial,helvetica,"DejaVu Sans","Arial Unicode MS","Lucida Sans Unicode",sans-serif;
+  font-style: normal;
+  text-decoration: none;
 }
 
 /* Custom page footer */
-/* line 40, ../../app/styles/main.scss */
+/* line 41, ../../app/styles/main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 46, ../../app/styles/main.scss */
+/* line 47, ../../app/styles/main.scss */
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
-/* line 51, ../../app/styles/main.scss */
+/* line 52, ../../app/styles/main.scss */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-/* line 55, ../../app/styles/main.scss */
+/* line 56, ../../app/styles/main.scss */
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
 }
 
 /* Supporting marketing content */
-/* line 62, ../../app/styles/main.scss */
+/* line 63, ../../app/styles/main.scss */
 .marketing {
   margin: 40px 0;
 }
-/* line 65, ../../app/styles/main.scss */
+/* line 66, ../../app/styles/main.scss */
 .marketing p + h4 {
   margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* line 72, ../../app/styles/main.scss */
+  /* line 73, ../../app/styles/main.scss */
   .container {
     max-width: 730px;
   }
 
   /* Remove the padding we set earlier */
-  /* line 77, ../../app/styles/main.scss */
+  /* line 78, ../../app/styles/main.scss */
   .header,
   .marketing,
   .footer {
@@ -8584,29 +8585,29 @@ body {
   }
 
   /* Space out the masthead */
-  /* line 84, ../../app/styles/main.scss */
+  /* line 85, ../../app/styles/main.scss */
   .header {
     margin-bottom: 30px;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
-  /* line 88, ../../app/styles/main.scss */
+  /* line 89, ../../app/styles/main.scss */
   .jumbotron {
     border-bottom: 0;
   }
 }
-/* line 93, ../../app/styles/main.scss */
+/* line 94, ../../app/styles/main.scss */
 #wrapper {
   padding-left: 0;
   transition: all 0.5s ease;
 }
 
-/* line 101, ../../app/styles/main.scss */
+/* line 102, ../../app/styles/main.scss */
 #wrapper.toggled {
   padding-left: 250px;
 }
 
-/* line 105, ../../app/styles/main.scss */
+/* line 106, ../../app/styles/main.scss */
 #sidebar-wrapper {
   z-index: 1000;
   position: fixed;
@@ -8619,26 +8620,26 @@ body {
   transition: all 0.5s ease;
 }
 
-/* line 120, ../../app/styles/main.scss */
+/* line 121, ../../app/styles/main.scss */
 #wrapper.toggled #sidebar-wrapper {
   width: 250px;
 }
 
-/* line 124, ../../app/styles/main.scss */
+/* line 125, ../../app/styles/main.scss */
 #page-content-wrapper {
   width: 100%;
   position: absolute;
   padding: 15px;
 }
 
-/* line 130, ../../app/styles/main.scss */
+/* line 131, ../../app/styles/main.scss */
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -250px;
 }
 
 /* Sidebar Styles */
-/* line 137, ../../app/styles/main.scss */
+/* line 138, ../../app/styles/main.scss */
 .sidebar-nav {
   position: absolute;
   top: 0;
@@ -8648,80 +8649,110 @@ body {
   list-style: none;
 }
 
-/* line 146, ../../app/styles/main.scss */
+/* line 147, ../../app/styles/main.scss */
 .sidebar-nav li {
   text-indent: 20px;
   line-height: 40px;
 }
 
-/* line 151, ../../app/styles/main.scss */
+/* line 152, ../../app/styles/main.scss */
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
   color: #333;
 }
 
-/* line 157, ../../app/styles/main.scss */
-.sidebar-nav li a:hover {
+/* line 158, ../../app/styles/main.scss */
+.sidebar-nav li a:hover, a.active {
   text-decoration: none;
-  color: #000;
-  background: rgba(255, 255, 255, 0.2);
+  color: #fff !important;
+  background: #bebebe;
 }
 
-/* line 163, ../../app/styles/main.scss */
+/* line 164, ../../app/styles/main.scss */
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;
 }
 
-/* line 168, ../../app/styles/main.scss */
+/* line 169, ../../app/styles/main.scss */
 .sidebar-nav > .sidebar-brand {
   height: 65px;
   font-size: 18px;
   line-height: 60px;
 }
 
-/* line 174, ../../app/styles/main.scss */
+/* line 175, ../../app/styles/main.scss */
 .sidebar-nav > .sidebar-brand a {
   color: #333;
 }
 
-/* line 178, ../../app/styles/main.scss */
+/* line 179, ../../app/styles/main.scss */
 .sidebar-nav > .sidebar-brand a:hover {
   color: #999;
   background: none;
 }
 
 @media (min-width: 768px) {
-  /* line 184, ../../app/styles/main.scss */
+  /* line 185, ../../app/styles/main.scss */
   #wrapper {
     padding-left: 250px;
   }
 
-  /* line 188, ../../app/styles/main.scss */
+  /* line 189, ../../app/styles/main.scss */
   #wrapper.toggled {
     padding-left: 0;
   }
 
-  /* line 192, ../../app/styles/main.scss */
+  /* line 193, ../../app/styles/main.scss */
   #sidebar-wrapper {
     width: 250px;
   }
 
-  /* line 196, ../../app/styles/main.scss */
+  /* line 197, ../../app/styles/main.scss */
   #wrapper.toggled #sidebar-wrapper {
     width: 0;
   }
 
-  /* line 200, ../../app/styles/main.scss */
+  /* line 201, ../../app/styles/main.scss */
   #page-content-wrapper {
     padding: 20px;
     position: relative;
   }
 
-  /* line 205, ../../app/styles/main.scss */
+  /* line 206, ../../app/styles/main.scss */
   #wrapper.toggled #page-content-wrapper {
     position: relative;
     margin-right: 0;
   }
+}
+/* line 211, ../../app/styles/main.scss */
+.label-space {
+  margin-right: 10px;
+}
+
+/* line 214, ../../app/styles/main.scss */
+.remove-spaces {
+  margin-top: 0px;
+}
+
+/* line 217, ../../app/styles/main.scss */
+.provider {
+  font-size: 24px;
+}
+
+/* line 220, ../../app/styles/main.scss */
+.relFix {
+  position: relative;
+  padding-top: 100px;
+}
+
+/* line 224, ../../app/styles/main.scss */
+.page-header {
+  z-index: 2000;
+  width: 100%;
+  background: #fff;
+  height: 80px;
+  position: fixed;
+  top: 0px;
 }

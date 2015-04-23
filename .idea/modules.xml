@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/shovel.iml" filepath="$PROJECT_DIR$/shovel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/client-api/shovel-client-api.iml" filepath="$PROJECT_DIR$/client-api/shovel-client-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend/shovel-frontend.iml" filepath="$PROJECT_DIR$/frontend/shovel-frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/shovel-service.iml" filepath="$PROJECT_DIR$/service/shovel-service.iml" />
+    </modules>
+  </component>
+</project>
