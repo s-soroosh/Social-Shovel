@@ -12,7 +12,7 @@ class ClassificationListener(object):
     def __init__(self, con):
         self.con = con
         self.opinions = {0: "UNSATISFIED", 1: "SATISFIED", -1: "NEUTRAL"}
-	self.categories = {0:"UNDERWEAR", 1: "ACCESSORIES", 2: "DRESS", 3: "JACKET", 4: "SHIRT", 5: "SHOE", 6: "SKIRT", 7:"SUIT", 8:"TROUSER", -1: "NEUTRAL"}
+        self.categories = {0:"UNDERWEAR", 1: "ACCESSORIES", 2: "DRESS", 3: "JACKET", 4: "SHIRT", 5: "SHOE", 6: "SKIRT", 7:"SUIT", 8:"TROUSER", -1: "NEUTRAL"}
 
     def on_error(self, headers, message):
         json.load(message)
@@ -32,14 +32,14 @@ class ClassificationListener(object):
             label_name = self.opinions[label]
 
             # category classification
-            tvec = classifier.dp_category.process_unclassified_data(text)
-	    category = classifier.cls_category.classify(tvec)
-            category_name = self.categories[category]
+        tvec = classifier.dp_category.process_unclassified_data(text)
+        category = classifier.cls_category.classify(tvec)
+        category_name = self.categories[category]
 
-            print "tweet: ", text
-            print "opinion: ", label_name
-            print "category: ", category_name
-            print
+        print "tweet: ", text
+        print "opinion: ", label_name
+        print "category: ", category_name
+        print
 
         message_dict['userOpinion'] = label_name
         message_dict['messageClass'] = category_name
