@@ -6,10 +6,12 @@ import numpy as np
 import fetch_traindata
 import re
 import math
+from nltk import stem
 
 class data_preparation(object):
     def __init__(self, options):
         self.token_mapping = {}
+        self.stemmer = stem.PorterStemmer()
         # for debugging
         self.reverse_token_mapping = {}
         self.token_occurence = {}
@@ -58,7 +60,6 @@ class data_preparation(object):
         return tvec        
 
     def tokenize(self, text, bigrams = True):
-        # stanford nlp?
         text = text.lower()
         # treat tags as normal words
         text = text.replace("#", " ")
@@ -78,6 +79,8 @@ class data_preparation(object):
         text = re.sub(r'@[A-Za-z0-9]*', '', text)
 
         tokens = re.findall(r"[\w']+", text)
+        # stem unigrams
+        tokens = map(self.stemmer.stem, tokens)
         # add bigrams
         if bigrams:
             for i in xrange(0, len(tokens) - 1):
