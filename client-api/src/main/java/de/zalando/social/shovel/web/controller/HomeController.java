@@ -1,6 +1,7 @@
 package de.zalando.social.shovel.web.controller;
 
 import de.zalando.social.shovel.service.criteria.AggregateCriteria;
+import de.zalando.social.shovel.service.messaging.Message;
 import de.zalando.social.shovel.service.messaging.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,8 +65,24 @@ public class HomeController {
 
     @RequestMapping(value="/aggregation/{criteria}",method= RequestMethod.GET)
     @ResponseBody
-    public Map<String, ?> aggregation(@PathVariable String criteria) {
+    public Map<String, ?> aggregation(@PathVariable String criteria,HttpServletRequest request, HttpServletResponse response) {
+
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type");
+
         AggregateCriteria crit = AggregateCriteria.valueOf(criteria.toUpperCase());
         return repository.aggrCount(crit);
+    }
+
+    @RequestMapping(value="/messages/{limit}",method= RequestMethod.GET)
+    @ResponseBody
+    public List<Message> Messages(@PathVariable int limit,HttpServletRequest request, HttpServletResponse response) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type");
+
+        // TODO: refactor this, do not fetch all
+        return repository.findAll().subList(0,limit);
     }
 }
