@@ -1,0 +1,97 @@
+<div class="page-header remove-spaces">
+    <h1>Statistics</h1>
+    </div>
+    <h2>Trends</h2>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Trend</th>
+                <th>Posts</th>
+                <th>Provider</th>
+                <th>Languages</th>
+                <th>Period</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="trend in trendsData | limitTo: 20">
+                <td>{{trend.name}}</td>
+                <td>{{trend.posts}}</td>
+                <td class="provider"><i class="fa fa-{{trend.provider | lowercase}}"></i></td>
+                <td><span class="label label-info label-space" ng-repeat="lang in trend.languages">{{lang}}</span></td>
+                <td>{{trend.period}}</td>
+            </tr>
+            </tbody>
+            <tfoot ng-show="socialMediaMessages.length > itemsPerPage">
+            <td colspan="5">
+                <div >
+                    <ul class="pagination">
+                        <li ng-class="prevPageDisabled()">
+                            <a  aria-label="Previous" ng-click="prevPage()">  <span aria-hidden="true">&laquo; Previous </span></a>
+                        </li>
+                        <li ng-repeat="n in range()"
+                            ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                            <a href="#">{{n+1}}</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()">
+                            <a aria-label="Next" ng-click="nextPage()"><span aria-hidden="true">Next &raquo;</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-md-6">
+<canvas id="base" class="chart-base" chart-type="type" data="data"
+        labels="labels" legend="true"></canvas>
+    </div>
+    </div>
+<h2>Zalando related tweets</h2>
+<div class="row">
+    <div class="col-md-6"><table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Message</th>
+            <th>Provider</th>
+            <th>Language</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="message in socialMediaMessages |  filter:search |
+        offset: currentPage*itemsPerPage |
+        limitTo: itemsPerPage">
+            <td><img  ng-if="message.imageUrl" ng-src="message.imageUrl"> {{message.userInfo.name}}</td>
+            <td>{{message.content}}</td>
+            <td class="provider"><i class="fa fa-{{message.provider | lowercase}}"></i></td>
+            <td>{{message.language}}</td>
+        </tr>
+        <tfoot ng-show="socialMediaMessages.length > itemsPerPage">
+        <td colspan="4">
+            <div >
+                <ul class="pagination">
+                    <li ng-class="prevPageDisabled()">
+                        <a  aria-label="Previous" ng-click="prevPage()">  <span aria-hidden="true">&laquo; Previous </span></a>
+                    </li>
+                    <li ng-repeat="n in range()"
+                        ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                        <a href="#">{{n+1}}</a>
+                    </li>
+                    <li ng-class="nextPageDisabled()">
+                        <a aria-label="Next" ng-click="nextPage()"><span aria-hidden="true">Next &raquo;</span></a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+        </tfoot>
+        </tbody>
+    </table></div>
+    <div class="col-md-6">
+<canvas id="line" class="chart chart-line" data="zData"
+        labels="zLabels" legend="true" series="series"
+        click="onClick">
+</canvas>
+        </div>
+    </div>

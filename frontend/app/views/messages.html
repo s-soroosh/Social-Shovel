@@ -1,0 +1,45 @@
+<div class="page-header remove-spaces">
+    <h1>Messages</h1>
+</div>
+<div class="input-group input-group-lg">
+    <span class="input-group-addon" id="sizing-addon1">search</span>
+    <input type="text" class="form-control" ng-model="search" aria-describedby="sizing-addon1">
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Message</th>
+        <th>Provider</th>
+        <th>Language</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="message in socialMediaMessages |  filter:search |
+        offset: currentPage*itemsPerPage |
+        limitTo: itemsPerPage">
+        <td><img  ng-if="message.imageUrl" ng-src="message.imageUrl"> {{message.userInfo.name}}</td>
+        <td>{{message.content}}</td>
+        <td class="provider"><i class="fa fa-{{message.provider | lowercase}}"></i></td>
+        <td>{{message.language}}</td>
+    </tr>
+    <tfoot ng-show="socialMediaMessages.length > itemsPerPage">
+    <td colspan="4">
+        <div >
+            <ul class="pagination">
+                <li ng-class="prevPageDisabled()">
+                    <a  aria-label="Previous" ng-click="prevPage()">  <span aria-hidden="true">&laquo; Previous </span></a>
+                </li>
+                <li ng-repeat="n in range()"
+                    ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                    <a href="#">{{n+1}}</a>
+                </li>
+                <li ng-class="nextPageDisabled()">
+                    <a aria-label="Next" ng-click="nextPage()"><span aria-hidden="true">Next &raquo;</span></a>
+                </li>
+            </ul>
+        </div>
+    </td>
+    </tfoot>
+    </tbody>
+</table>
