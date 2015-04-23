@@ -4,3 +4,4 @@ stomp.py
 numpy
 scipy
 scikit-learn
+nltk
