@@ -48,7 +48,12 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
             HashMap<String, Object> map = it.next();
             StringBuffer criteriaBuff = new StringBuffer();
             for(String criteria : criterias) {
-                criteriaBuff.append(map.get(criteria).toString()).append("_");
+                Object key = map.get(criteria);
+                String keyValue = "";
+                if(key != null) {
+                    keyValue = key.toString();
+                }
+                criteriaBuff.append(keyValue).append("_");
             }
             results.put(criteriaBuff.substring(0, criteriaBuff.length()-1), (Double)map.get("count"));
         }

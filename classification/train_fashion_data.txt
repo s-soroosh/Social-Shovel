@@ -360,7 +360,7 @@ Sleeveless shirt     %%% 0
 Slim-fit pants    %%% 8
 Slip     %%% 0
 Slip dress   %%% 2
-Slip-on shoe   %%% 5
+Slipon shoe   %%% 5
 Slipper   %%% 5
 Smoking jacket   %%% 3
 Sneakers   %%% 5
@@ -465,3 +465,10 @@ Wraparound skirt   %%% 6
 Wristwatch %%% 1
 Y-fronts     %%% 0
 Yoga pants    %%% 8
+Jewlery %%% 1
+earring %%% 1
+ring %%% 1
+pearl %%% 1
+necklace %%% 1
+bracelet %%% 1
+bangle %%% 1

@@ -1,3 +1,4 @@
+.idea/*
 frontend/target
 client-api/target
 service/target

@@ -78,7 +78,11 @@ class data_preparation(object):
         # remove usernames
         text = re.sub(r'@[A-Za-z0-9]*', '', text)
 
+        # removing "-" to avoid generic tokens
+	text = text.replace("-", "")
+
         tokens = re.findall(r"[\w']+", text)
+
         # stem unigrams
         tokens = map(self.stemmer.stem, tokens)
         # add bigrams
@@ -124,7 +128,7 @@ class classifier(object):
         # with probabilities
         classes = self.clf.predict_proba(unknown_text_vector)
         max_class = (-1, 0)
-        min_prob = (1.0 / float(len(list(classes[0])))) * 1.2
+        min_prob = 0.6
         for i, prob in enumerate(list(classes[0])):
             if prob > min_prob and prob > max_class[1]:
                 max_class = (i, prob)
@@ -170,17 +174,20 @@ def explain_result(tvec, assigned_class, data_preparation, classifier):
     print "Further explanation"
     print
     print "Document Tokens"
+    doc_tokens = set()
     for i, t in enumerate(tvec):
         if t > 0:
-            print "\t", dp_sentiment.reverse_token_mapping[i], t
+            print "\t", data_preparation.reverse_token_mapping[i], t
+            doc_tokens.add(i)
 
-    for model_index in [0]:
+    coef = classifier.clf.coef_
+    for model_index in coef:
         dims = {}
-        for i,t in enumerate(cls_sentiment.clf.coef_[model_index]):
-            if t != 0:
-                dims[dp_sentiment.reverse_token_mapping[i]] = t
+        for i,t in enumerate(model_index):
+            if t != 0 and i in doc_tokens:
+                dims[data_preparation.reverse_token_mapping[i]] = float(t)
         dims = sorted(dims.items(), key=lambda x: x[1])
-        print "Class Model %d - 5 strongest modelfeatures pos/neg" % model_index
+#        print "Class Model %d - 5 strongest modelfeatures pos/neg" % model_index
         print dims[-5:]
         print dims[0:5]
 
@@ -195,13 +202,18 @@ print text
 tvec = dp_sentiment.process_unclassified_data(text)
 label = cls_sentiment.classify(tvec)
 print "Assigned class", label
-explain_result(tvec, label, dp_sentiment, cls_sentiment)
+#explain_result(tvec, label, dp_sentiment, cls_sentiment)
 print "\n\n"
 
 print "Example 2"
-text = "Look at my awesome wedding dress"
+#text = "Look at my awesome wedding dress"
+text = "Today's Penguin deals! http://t.co/lqWElp2g2T #penguin #fashion"
+text = "Are your dealines looming? Let us know what you are working on today, maybe we can help! #bloggers #journos #health #beauty #fashion #ideas "
+text = "RT @melissacampbe12: Throw back to my last shoot working with the beautiful @georgeemsley #fashion #styling https://t.co/jfAS4yz1wh"
+text = "#Jewelry #Fashion 925 Silver 2.5ct Created Blue \u0026 White Sapphire Oval Clutchless Earrings http://t.co/fPWHlw6wcY #Accessories #Deals"
 print text
 tvec = dp_category.process_unclassified_data(text)
 label = cls_category.classify(tvec)
+explain_result(tvec, label, dp_category, cls_category)
 print "Assigned class", label
 print "\n\n"
