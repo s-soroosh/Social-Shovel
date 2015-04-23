@@ -78,7 +78,11 @@ class data_preparation(object):
         # remove usernames
         text = re.sub(r'@[A-Za-z0-9]*', '', text)
 
+        # removing "-" to avoid generic tokens
+	text = text.replace("-", "")
+
         tokens = re.findall(r"[\w']+", text)
+
         # stem unigrams
         tokens = map(self.stemmer.stem, tokens)
         # add bigrams
@@ -205,6 +209,8 @@ print "Example 2"
 #text = "Look at my awesome wedding dress"
 text = "Today's Penguin deals! http://t.co/lqWElp2g2T #penguin #fashion"
 text = "Are your dealines looming? Let us know what you are working on today, maybe we can help! #bloggers #journos #health #beauty #fashion #ideas "
+text = "RT @melissacampbe12: Throw back to my last shoot working with the beautiful @georgeemsley #fashion #styling https://t.co/jfAS4yz1wh"
+text = "#Jewelry #Fashion 925 Silver 2.5ct Created Blue \u0026 White Sapphire Oval Clutchless Earrings http://t.co/fPWHlw6wcY #Accessories #Deals"
 print text
 tvec = dp_category.process_unclassified_data(text)
 label = cls_category.classify(tvec)

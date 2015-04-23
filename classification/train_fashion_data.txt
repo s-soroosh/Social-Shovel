@@ -465,3 +465,10 @@ Wraparound skirt   %%% 6
 Wristwatch %%% 1
 Y-fronts     %%% 0
 Yoga pants    %%% 8
+Jewlery %%% 1
+earring %%% 1
+ring %%% 1
+pearl %%% 1
+necklace %%% 1
+bracelet %%% 1
+bangle %%% 1
