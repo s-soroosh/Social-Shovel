@@ -9,16 +9,36 @@
  */
 angular.module('zssApp')
   .controller('MainCtrl', function ($scope,$websocket,DataService) {
-        var dataStream = $websocket('ws://localhost:9090/socket/simple');
+        var dataStream = $websocket('ws://10.161.128.35:9090/socket/simple');
             $scope.data = DataService.data;
             $scope.countryData = DataService.countryData;
             $scope.socialMediaMessages = DataService.socialMediaMessages;
             $scope.collection = [];
 
-
+        if($scope.socialMediaMessages.length) {
+            $scope.socialMediaMessages.forEach(function(message) {
+                if(message.topics.length && message.topics.join().match(/zalando/ig)) {
+                    console.dir(message);
+                    if(message.userOpinion.toLowerCase()=="positive") {
+                        $scope.data[0]+=1;
+                        if(message.country=="DEU") {
+                            $scope.countryData[0]+=message.count;
+                        } else if(message.country=="NLD") {
+                            $scope.countryData[1]+=message.count;
+                        } else {
+                            $scope.countryData[2]+=message.count;
+                        }
+                    } else if(message.userOpinion.toLowerCase()=="neutral") {
+                        $scope.data[1]+=1;
+                    } else if(message.userOpinion.toLowerCase()=="negative") {
+                        $scope.data[2]+=1;
+                    }
+                }
+            });
+        }
         $scope.processMessage = function(message) {
-            if(message.type=="statistic") {
-                if(message.category=="positive") {
+            if(message.topics.length && message.topics.join().match(/zalando/ig)) {
+                if(message.userOpinion=="positive") {
                     $scope.data[0]+=message.count;
                     if(message.country=="DEU") {
                         $scope.countryData[0]+=message.count;
@@ -27,16 +47,14 @@ angular.module('zssApp')
                     } else {
                         $scope.countryData[2]+=message.count;
                     }
-                } else if(message.category=="neutral") {
+                } else if(message.userOpinion=="neutral") {
                     $scope.data[1]+=message.count;
-                } else if(message.category=="negative") {
+                } else if(message.userOpinion=="negative") {
                     $scope.data[2]+=message.count;
                 }
             } else {
                 $scope.socialMediaMessages.unshift(message);
             }
-            console.dir(message);
-
             $scope.collection.push(message);
         };
         $scope.checkClass = function(opinion) {
@@ -47,7 +65,7 @@ angular.module('zssApp')
             }
         };
         dataStream.onMessage(function(message) {
-            $scope.processMessage(JSON.parse(message.data));
+             $scope.processMessage(JSON.parse(message.data));
         });
 
         $scope.labels = ["Positive", "Neutral", "Negative"];

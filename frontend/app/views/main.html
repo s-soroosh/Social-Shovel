@@ -3,24 +3,25 @@
 </div>
 <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">Latest messages</div>
-
+        <div class="panel-heading">Latest messages with Zalando</div>
 
         <table class="table table-striped">
                 <thead>
                 <tr>
                         <th>Name</th>
-                        <th>Message</th>
+                        <th class="messageField">Message</th>
                         <th>Provider</th>
+                        <th>User opinion</th>
                         <th>Language</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="message in socialMediaMessages | limitTo: 5">
-                        <td><img  ng-if="message.imageUrl" ng-src="message.imageUrl"> {{message.userInfo.name}}</td>
+                <tr ng-repeat="message in socialMediaMessages |  filter:'Zalando'">
+                        <td><img  ng-if="message.userInfo.imageUrl" ng-src="{{message.userInfo.imageUrl}}">{{message.userInfo.name}}</td>
                         <td>{{message.content}}</td>
                         <td class="provider"><i class="fa fa-{{message.provider | lowercase}}"></i></td>
-                        <td>{{message.language}}</td>
+                        <td>{{message.userOpinion}}</td>
+                        <td>{{message.language}} {{message.topics}}</td>
                 </tr>
                 </tbody>
         </table>

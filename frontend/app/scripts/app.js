@@ -21,8 +21,11 @@ angular
     'ngTouch',
       'chart.js'
   ])
-  .config(function ($routeProvider,$locationProvider) {
-    $routeProvider
+  .config(function ($routeProvider,$locationProvider,$httpProvider) {
+      $httpProvider.defaults.useXDomain = true;
+
+
+      $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'

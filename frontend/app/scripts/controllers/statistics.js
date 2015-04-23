@@ -8,17 +8,36 @@
  * Controller of the zssApp
  */
 angular.module('zssApp')
-  .controller('StatisticsCtrl', function ($scope,DataService) {
+  .controller('StatisticsCtrl', function ($scope,DataService,$http) {
       $scope.labels = [];
       $scope.data = [];
       $scope.type = 'PolarArea';
-      $scope.trendsData=DataService.trendsData;
+      $scope.trendsData=[];
       $scope.socialMediaMessages = DataService.socialMediaMessages;
+        var sortFunction = function(a, b){
+            console.log(a);
+            if(a.posts > b.posts) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+        $http.get('http://10.161.128.35:9090/aggregation/class').success(function(data) {
+            if(data) {
+                for(var i in data) {
+                    if(i) {
+                        $scope.trendsData.push({name: i, posts: data[i]});
+                    }
+                }
+                $scope.trendsData.sort(sortFunction);
+                $scope.trendsData.forEach(function(item,index) {
+                    $scope.data.push(item.posts);
+                    $scope.labels.push(item.name);
+                });
+            }
+        });
 
-      $scope.trendsData.forEach(function(item,index) {
-        $scope.data.push(item.posts);
-        $scope.labels.push(item.name);
-      });
+
 
       $scope.zLabels = ["January", "February", "March", "April", "May", "June", "July"];
       $scope.series = ['Zalando satisfaction rate'];

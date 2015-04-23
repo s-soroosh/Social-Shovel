@@ -13,13 +13,7 @@ angular.module('zssApp')
       this.countryData=[0,0,0];
         this.socialMediaMessages=[];
         this.mapRate=[
-            ['Country', 'Popularity'],
-            ['Germany', 100],
-            ['Poland', 79],
-            ['Netherlands', 77],
-            ['Great Britain', 33],
-            ['Italy', 66],
-            ['France', 80]
+            ['Country', 'Popularity']
         ];
         this.trendsData = [{name:"Shoes",provider:"twitter",posts:332,languages:["DE","ENG"],period:"May-June"},
             {name:"Sneakers",provider:"twitter",posts:550,languages:["FR","ENG"],period:"May-June"},
