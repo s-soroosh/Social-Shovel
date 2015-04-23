@@ -109,7 +109,7 @@ public class Message implements Serializable {
     }
 
     public void changeUserOpinion(Message.UserOpinion opinion) {
-        if (this.userOpinion != UserOpinion.NEUTRAL) {
+        if (this.userOpinion != null && this.userOpinion != UserOpinion.NEUTRAL) {
             throw new IllegalStateException("It is not possible to change the opinion more than 1 time!");
         }
         this.userOpinion = opinion;

@@ -19,8 +19,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Import({ServiceConfiguration.class})
 public class ZalandoDemoApplication{
 
-
-
     public static void main(String[] args) {
         SpringApplication.run(ZalandoDemoApplication.class, args);
 

@@ -1,6 +1,5 @@
 package de.zalando.social.shovel.service;
 
-import com.mongodb.DBObject;
 import de.zalando.social.shovel.service.configuration.ServiceConfiguration;
 import de.zalando.social.shovel.service.criteria.AggregateCriteria;
 import de.zalando.social.shovel.service.messaging.Message;
@@ -16,7 +15,6 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,23 +28,23 @@ public class MongoInsertTest {
     @Autowired
     private MessageRepository repository;
 
-//    @Test
-//    public void testMongoInsert(){
-//        Message.MessageBuilder messageBuilder = new Message.MessageBuilder("simple content", "twitter", "simple");
-//        Message msg = messageBuilder.on(new Date()).build();
-//        repository.insert(msg);
-//        int count = 0;
-//        for(Message m : repository.findByProvider("twitter")) {
-//            ++count;
-//        }
-//
-//        Assert.assertEquals(count,2);
-//
-//    }
+    @Test
+    public void testMongoInsert(){
+        Message.MessageBuilder messageBuilder = new Message.MessageBuilder("simple content", "twitter", "simple");
+        Message msg = messageBuilder.on(new Date()).build();
+        repository.insert(msg);
+        int count = 0;
+        for(Message m : repository.findByProvider("twitter")) {
+            ++count;
+        }
+
+        Assert.assertEquals(count,2);
+
+    }
 
 
     @Test
-    public void testMongoAggregation(){
+    public void testMongoAggregationByOneCriteria(){
 
         String[] providers = new String[] {"twitter","facebook"};
 
@@ -56,7 +54,7 @@ public class MongoInsertTest {
             for(int j=0;j<3*insertCount;j++) {
                 // 3 twitter messages and 6 FB messages to be inserted
                 Message.MessageBuilder messageBuilder = new Message.MessageBuilder("simple content", providers[i], "simple");
-                Message msg = messageBuilder.on(new Date()).build();
+                Message msg = messageBuilder.on(new Date()).at("Germany").build();
                 repository.insert(msg);
             }
         }
@@ -64,6 +62,34 @@ public class MongoInsertTest {
         Map<String, Double> results = repository.aggrCount(AggregateCriteria.PROVIDER);
         System.out.println(results);
         String[] chkProviders = new String[] {"facebook", "twitter"};
+        for(String key : chkProviders) {
+            Assert.assertEquals(true, results.containsKey(key));
+        }
+    }
+
+    @Test
+    public void testMongoAggregationByMultipleCriteria(){
+
+        String[] providers = new String[] {"twitter","facebook"};
+
+        System.out.println("Inserting dummy entries for test");
+        for(int i=0;i<providers.length;i++) {
+            int insertCount = (i+1);
+            for(int j=0;j<3*insertCount;j++) {
+                // 3 twitter messages and 6 FB messages to be inserted
+                Message.MessageBuilder messageBuilder = new Message.MessageBuilder("simple content", providers[i], "simple");
+                Message msg = messageBuilder.on(new Date()).at("Germany").build();
+                if(j % 2 == 0) {
+                    msg.changeUserOpinion(Message.UserOpinion.SATISFIED);
+                } else {
+                    msg.changeUserOpinion(Message.UserOpinion.UNSATISFIED);
+                }
+                repository.insert(msg);
+            }
+        }
+
+        Map<String, Double> results = repository.aggrCountByMultipleCriterias(AggregateCriteria.PROVIDER,AggregateCriteria.OPINION);
+        String[] chkProviders = new String[] {"facebook_SATISFIED", "twitter_SATISFIED", "facebook_UNSATISFIED", "twitter_UNSATISFIED"};
         for(String key : chkProviders) {
             Assert.assertEquals(true, results.containsKey(key));
         }

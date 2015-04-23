@@ -134,7 +134,7 @@ Espadrille   %%% 5
 eton jacket   %%% 3
 evening dress   %%% 2
 Evening gown   %%% 2
-Fashion boot   %%% 5
+boot   %%% 5
 Field jacket   %%% 3
 Flak jacket   %%% 3
 Flannel jacket   %%% 3
@@ -185,11 +185,13 @@ Jazz shoe   %%% 5
 Jean jacket   %%% 3
 Jean skirt   %%% 6
 Jeans    %%% 8
+denim jeans %%% 8
 Jelly shoes   %%% 5
 Jerkin   %%% 3
 Jersey   %%% 4
 Jersey nightshirt     %%% 0
 Jewellery   %%% 1
+jewelry %%% 1
 job skirt   %%% 6
 jock     %%% 0
 Jockey shorts     %%% 0
@@ -360,7 +362,7 @@ Sleeveless shirt     %%% 0
 Slim-fit pants    %%% 8
 Slip     %%% 0
 Slip dress   %%% 2
-Slip-on shoe   %%% 5
+Slipon shoe   %%% 5
 Slipper   %%% 5
 Smoking jacket   %%% 3
 Sneakers   %%% 5
@@ -465,3 +467,11 @@ Wraparound skirt   %%% 6
 Wristwatch %%% 1
 Y-fronts     %%% 0
 Yoga pants    %%% 8
+Jewlery %%% 1
+earring %%% 1
+ring %%% 1
+pearl %%% 1
+necklace %%% 1
+bracelet %%% 1
+bangle %%% 1
+accessories %%% 1

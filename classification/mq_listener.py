@@ -12,7 +12,8 @@ class ClassificationListener(object):
     def __init__(self, con):
         self.con = con
         self.opinions = {0: "UNSATISFIED", 1: "SATISFIED", -1: "NEUTRAL"}
-        self.categories = {0:"UNDERWEAR", 1: "ACCESSORIES", 2: "DRESS", 3: "JACKET", 4: "SHIRT", 5: "SHOE", 6: "SKIRT", 7:"SUIT", 8:"TROUSER", -1: "NEUTRAL"}
+        self.categories = {0: "UNDERWEAR", 1: "ACCESSORIES", 2: "DRESS", 3: "JACKET", 4: "SHIRT", 5: "SHOE", 6: "SKIRT",
+                           7: "SUIT", 8: "TROUSER", -1: "NEUTRAL"}
 
     def on_error(self, headers, message):
         json.load(message)
