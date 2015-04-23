@@ -29,6 +29,7 @@ public class LangToCountryTransformer {
             langToCountryMap.put("lv","Latvia");
             langToCountryMap.put("sl","Slovenia");
             langToCountryMap.put("ko","Korea");
+            langToCountryMap.put("it","Italy");
             langToCountryMap.put("und","Undetermined");
 
 
