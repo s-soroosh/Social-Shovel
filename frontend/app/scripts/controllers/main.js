@@ -19,15 +19,23 @@ angular.module('zssApp')
             $scope.socialMediaMessages.forEach(function(message) {
                 if(message.topics.length && message.topics.join().match(/zalando/ig)) {
                     console.dir(message);
+                    if(message.country=="Deutschland") {
+                        $scope.countryData[0]+=1;
+                    } else if(message.country=="United Kingdom") {
+                        $scope.countryData[1]+=1;
+                    }
+                    else if(message.country=="France") {
+                        $scope.countryData[2]+=1;
+                    }
+                    else if(message.country=="Spain") {
+                        $scope.countryData[3]+=1;
+                    }
+                    else if(message.country=="Italy") {
+                        $scope.countryData[4]+=1;
+                    }
                     if(message.userOpinion.toLowerCase()=="satisfied") {
                         $scope.data[0]+=1;
-                        if(message.country=="DEU") {
-                            $scope.countryData[0]+=message.count;
-                        } else if(message.country=="NLD") {
-                            $scope.countryData[1]+=message.count;
-                        } else {
-                            $scope.countryData[2]+=message.count;
-                        }
+
                     } else if(message.userOpinion.toLowerCase()=="neutral") {
                         $scope.data[1]+=1;
                     } else if(message.userOpinion.toLowerCase()=="unsatisfied") {
@@ -85,18 +93,13 @@ angular.module('zssApp')
                 else if(message.country=="Italy") {
                     $scope.countryData[4]+=1;
                 }
-                if(message.userOpinion && message.userOpinion=="satisfied") {
-                    $scope.data[0]+=message.count;
-
-                } else if(message.userOpinion && message.userOpinion=="neutral") {
-                    $scope.data[1]+=message.count;
-                } else if(message.userOpinion && message.userOpinion=="unsatisfied") {
-                    $scope.data[2]+=message.count;
+                if(message.userOpinion && message.userOpinion.toLowerCase()=="satisfied") {
+                    $scope.data[0]+=1;
+                } else if(message.userOpinion && message.userOpinion.toLowerCase()=="neutral") {
+                    $scope.data[1]+=1;
+                } else if(message.userOpinion && message.userOpinion.toLowerCase()=="unsatisfied") {
+                    $scope.data[2]+=1;
                 }
-            } else {
-                console.log('New twit');
-
-
             }
             $scope.socialMediaMessages.unshift(message);
             $scope.collection.push(message);
@@ -113,7 +116,7 @@ angular.module('zssApp')
              $scope.processMessage(JSON.parse(message.data));
         });
 
-        $scope.labels = ["unsatisfied", "Neutral", "Satisfied"];
+        $scope.labels = ["Satisfied", "Neutral", "Unsatisfied"];
         $scope.countryLabels = ["Deutschland", "United Kingdom", "France","Spain","Italy"];
         $scope.colors=['rgba(151,187,205,1)','rgba(220,220,220,1)','rgba(247,70,74,1)'];
 
