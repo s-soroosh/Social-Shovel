@@ -26,6 +26,7 @@ angular.module('zssApp')
                         }, 10000);
                     }
                 }
+                console.dir($scope.mapRate);
             });
         }
 
