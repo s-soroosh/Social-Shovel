@@ -10,6 +10,5 @@ import java.util.Map;
  * Created by vvenkatraman on 21/04/15.
  */
 public interface MessageRepositoryCustom {
-    public Map<String, Double> aggrCount(AggregateCriteria criteria);
-    public Map<String, Double> aggrCountByMultipleCriterias(AggregateCriteria... criterias);
+    public List<Map<String, Object>> aggrCountByCriterias(AggregateCriteria... criterias);
 }

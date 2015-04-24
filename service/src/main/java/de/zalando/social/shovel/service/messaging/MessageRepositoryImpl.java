@@ -1,16 +1,23 @@
 package de.zalando.social.shovel.service.messaging;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.CommandResult;
+import com.mongodb.DBObject;
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import de.zalando.social.shovel.service.criteria.AggregateCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.mapreduce.GroupByResults;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import javax.sound.midi.Soundbank;
+import java.util.*;
 
 /**
  * Created by vvenkatraman on 21/04/15.
@@ -20,44 +27,75 @@ public class MessageRepositoryImpl implements MessageRepositoryCustom {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    @Override
-    public Map<String, Double> aggrCount(AggregateCriteria criteria) {
-        return compute(criteria.getValue());
-    }
+    @Autowired
+    private MongoOperations mongoOperations;
 
-    @Override
-    public Map<String, Double> aggrCountByMultipleCriterias(AggregateCriteria... criterias) {
-        String[] strCriterias = new String[criterias.length];
-        int i=0;
-        for(AggregateCriteria criteria : criterias) {
-            strCriterias[i++] = criteria.getValue();
+    // STEP 1: Construct the query using all the criterias provided.
+    private BasicDBObject constructCriteriaQuery(AggregateCriteria... criterias) {
+        BasicDBObject dbObject = new BasicDBObject();
+        for(AggregateCriteria it : criterias) {
+            if(it == AggregateCriteria.MONTH || it == AggregateCriteria.DAY) {
+                dbObject.append(it.getValue(), new BasicDBObject("$"+it.getValue(), "$" + AggregateCriteria.POSTEDDATE.getValue()));
+            } else {
+                dbObject.append(it.getValue(), "$"+it.getValue());
+            }
+
         }
-        return compute(strCriterias);
+        return dbObject;
     }
 
-    private Map<String, Double> compute(String... criterias) {
-        GroupByResults<HashMap> groupedResults = mongoTemplate.group("message",
-                GroupBy.key(criterias).initialDocument("{ count: 0 }").reduceFunction("function(doc, prev) { prev.count += 1 }"),
-                HashMap.class);
+    // STEP 2: Insert the criteria object into pipeline to be executed...
+    private BasicDBObject constructAggregationPipeline(BasicDBObject dbObject) {
+        BasicDBList pipeline = new BasicDBList();
+        pipeline.add(
+                new BasicDBObject("$group",
+                        new BasicDBObject("_id", dbObject)
+                                .append("count", new BasicDBObject("$sum", 1))
+                )
+        );
 
+        BasicDBObject aggregation = new BasicDBObject("aggregate","message")
+                .append("pipeline", pipeline);
 
-        HashMap<String, Double> results = new HashMap<>();
+        return aggregation;
+    }
 
-        Iterator<HashMap> it = groupedResults.iterator();
-        while(it.hasNext()) {
-            HashMap<String, Object> map = it.next();
-            StringBuffer criteriaBuff = new StringBuffer();
-            for(String criteria : criterias) {
-                Object key = map.get(criteria);
+    private BasicDBObject generateCommand(AggregateCriteria... criterias) {
+        BasicDBObject dbObject = null;
+        dbObject = constructCriteriaQuery(criterias);
+        BasicDBObject aggregationPipeline = constructAggregationPipeline(dbObject);
+        return aggregationPipeline;
+    }
+
+    private List<Map<String, Object>> buildResult(CommandResult commandResult, AggregateCriteria... criterias) {
+        List<Map<String, Object>> finalResults = new ArrayList<>();
+        BasicDBList list = (BasicDBList)commandResult.get("result");
+        for(int i=0;i<list.size();i++) {
+            BasicDBObject dbo = (BasicDBObject)list.get(i);
+            BasicDBObject dbIdObj = (BasicDBObject)dbo.get("_id");
+            Map<String, Object> map = new HashMap<>();
+            for(AggregateCriteria criteria : criterias) {
+                Object key = dbIdObj.get(criteria.getValue());
                 String keyValue = "";
                 if(key != null) {
                     keyValue = key.toString();
                 }
-                criteriaBuff.append(keyValue).append("_");
+                map.put(criteria.getValue(), keyValue);
             }
-            results.put(criteriaBuff.substring(0, criteriaBuff.length()-1), (Double)map.get("count"));
+            map.put("count", dbo.get("count"));
+            finalResults.add(map);
         }
+        return finalResults;
+    }
 
-        return results;
+    private List<Map<String, Object>> compute(AggregateCriteria... criterias) {
+        BasicDBObject aggregation = generateCommand(criterias);
+        CommandResult commandResult = mongoOperations.executeCommand(aggregation);
+        return buildResult(commandResult, criterias);
+    }
+
+    @Override
+    public List<Map<String, Object>> aggrCountByCriterias(AggregateCriteria... criterias) {
+        return compute(criterias);
     }
 }
