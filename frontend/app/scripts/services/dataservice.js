@@ -10,7 +10,7 @@
 angular.module('zssApp')
   .service('DataService', function () {
       this.data=[0,0,0];
-      this.countryData=[0,0,0];
+      this.countryData=[0,0,0,0,0];
         this.socialMediaMessages=[];
         this.mapRate=[
             ['Country', 'Popularity']
