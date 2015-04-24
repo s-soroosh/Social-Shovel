@@ -33,12 +33,12 @@ angular.module('zssApp')
                     else if(message.country=="Italy") {
                         $scope.countryData[4]+=1;
                     }
-                    if(message.userOpinion.toLowerCase()=="satisfied") {
+                    if(message.userOpinion && message.userOpinion.toLowerCase()=="satisfied") {
                         $scope.data[0]+=1;
 
-                    } else if(message.userOpinion.toLowerCase()=="neutral") {
+                    } else if(message.userOpinion && message.userOpinion.toLowerCase()=="neutral") {
                         $scope.data[1]+=1;
-                    } else if(message.userOpinion.toLowerCase()=="unsatisfied") {
+                    } else if(message.userOpinion && message.userOpinion.toLowerCase()=="unsatisfied") {
                         $scope.data[2]+=1;
                     }
                 }
