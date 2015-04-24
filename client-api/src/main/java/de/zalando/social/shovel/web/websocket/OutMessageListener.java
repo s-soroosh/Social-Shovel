@@ -22,9 +22,6 @@ public class OutMessageListener {
     @Value("${shovel.websockets.messages.filter.enabled}")
     private boolean filterEnabled;
 
-    @Value("${shovel.websockets.messages.filter.languages}")
-    private String languagesProp;
-
     @JmsListener(destination = "${shovel.queue.message.out.destination}")
     public void onMessage(String message) throws Exception {
         Message ms  = gson.fromJson(message, Message.class);
