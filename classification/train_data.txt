@@ -120,3 +120,4 @@ worst %%% 0
 worst ever %%% 0
 bad %%% 0
 not good %%% 0
+like %%% 1

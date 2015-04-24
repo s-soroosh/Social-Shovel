@@ -8,9 +8,16 @@
  * Controller of the zssApp
  */
 angular.module('zssApp')
-  .controller('MessagesCtrl', function ($scope,DataService) {
+  .controller('MessagesCtrl', function ($scope,DataService,$http) {
+        $scope.socialMediaMessages = DataService.socialMediaMessages;
+        if (!DataService.socialMediaMessages.length) {
+            $scope.socialMediaMessages=[];
+            $http.get("http://10.161.128.35:9090/messages/1000").success(function (data) {
+                DataService.socialMediaMessages = data;
+                $scope.socialMediaMessages=data;
+            });
+        }
 
-      $scope.socialMediaMessages = DataService.socialMediaMessages;
         $scope.itemsPerPage = 20;
         $scope.currentPage = 0;
 

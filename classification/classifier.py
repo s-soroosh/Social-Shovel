@@ -80,7 +80,7 @@ class data_preparation(object):
         text = re.sub(r'@[A-Za-z0-9]*', '', text)
 
         # removing "-" to avoid generic tokens
-	text = text.replace("-", "")
+        text = text.replace("-", "")
 
         tokens = re.findall(r"[\w']+", text)
 
