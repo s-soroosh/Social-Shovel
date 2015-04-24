@@ -44,7 +44,7 @@ angular.module('zssApp')
                 }
             });
         } else {
-            $http.get("http://10.161.128.177:9090/messages/3000").success(function (data) {
+            $http.get("http://10.161.128.177:9090/messages/1000").success(function (data) {
                 DataService.socialMediaMessages = data;
                 $scope.socialMediaMessages=data;
                 $scope.socialMediaMessages.forEach(function(message) {
